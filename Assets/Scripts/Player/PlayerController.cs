@@ -1,42 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
     //          VARIABLES           // 
-    [SerializeField] private float speed = 4;
+    [SerializeField] private float speed = 4;     //Control de velocidad
 
     private CharacterController characterController;    //Referencia a CharacterController
-    private PlayerInput playerInput;
-    private Rigidbody rb;
-    private Vector2 input;
-    private Vector3 currentMovent;
-    private bool isMoving;
+    private Vector3 currentMovent;  // Dirección y magnitud del movimiento
+    private bool isMoving;      // Booleano que indica si el personaje se mueve
 
     private void Awake()
     {
-        characterController = GetComponent<CharacterController>();
-        playerInput = GetComponent<PlayerInput>();
+        characterController = GetComponent<CharacterController>();  // Referencia a CharacterController
     }
 
     private void Update()
     {
         ControllerMovement();
-        //input = playerInput.actions["Move"].ReadValue<Vector2>(); 
-    }
-
-    private void FixedUpdate()
-    {
-        //rb.AddForce(new Vector3(input.x,0f,input.y)*speed);
     }
 
     private void ControllerMovement()
     {
-        Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        currentMovent = move.normalized * (Time.deltaTime * speed);
-        characterController.Move(currentMovent);
+        Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));    // Entradas de teclado
+        currentMovent = move.normalized * (Time.deltaTime * speed);     // Normaliza la velocidad por el tiempo
+        characterController.Move(currentMovent);    // Aplica movimiento
 
         // Control de la rotacion del personaje
         if (move != Vector3.zero)
@@ -51,13 +40,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void Cut(InputAction.CallbackContext callbackContext)
-    {
-        if (callbackContext.performed)
-        {
-            Debug.Log("Esta cortando");
-        }
-    }
-
+    //  Metodo publico que indica si el personaje esta en movimiento o no
     public bool IsMoving() => isMoving;
 }
