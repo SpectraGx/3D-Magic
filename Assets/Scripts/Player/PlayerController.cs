@@ -1,24 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    //          VARIABLES           // 
-    [SerializeField] private float speed = 4;     //Control de velocidad
+    [Header("Variables")]
+    [SerializeField] private float speed = 7;     
 
-    private CharacterController characterController;    //Referencia a CharacterController
+    private CharacterController characterController;   
     private Vector3 currentMovent;  // Dirección y magnitud del movimiento
     private bool isMoving;      // Booleano que indica si el personaje se mueve
+    private PlayerInput playerInput;
+    Vector3 input;
 
     private void Awake()
     {
-        characterController = GetComponent<CharacterController>();  // Referencia a CharacterController
+        characterController = GetComponent<CharacterController>();  
+        playerInput = GetComponent<PlayerInput>();
     }
 
     private void Update()
     {
         ControllerMovement();
+        
     }
 
     private void ControllerMovement()
