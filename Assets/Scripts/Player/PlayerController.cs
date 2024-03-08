@@ -6,33 +6,35 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [Header("Variables")]
-    [SerializeField] private float speed = 7;     
+    [SerializeField] private float speed = 7;
 
-    private CharacterController characterController;   
-    private Vector3 currentMovent;  // Dirección y magnitud del movimiento
-    private bool isMoving;      // Booleano que indica si el personaje se mueve
+    private CharacterController characterController;
+    private Vector3 currentMovent;
+    private bool isMoving;
     private PlayerInput playerInput;
     Vector3 input;
 
     private void Awake()
     {
-        characterController = GetComponent<CharacterController>();  
+        characterController = GetComponent<CharacterController>();
         playerInput = GetComponent<PlayerInput>();
     }
 
     private void Update()
     {
+        input = playerInput.actions["Move"].ReadValue<Vector2>();
         ControllerMovement();
-        
+
     }
 
     private void ControllerMovement()
     {
-        Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));    // Entradas de teclado
-        currentMovent = move.normalized * (Time.deltaTime * speed);     // Normaliza la velocidad por el tiempo
+        Vector3 move = new Vector3(input.x, 0, input.y);    // Entradas de teclado
+        currentMovent = move * (Time.deltaTime * speed);     // Normaliza la velocidad por el tiempo
         characterController.Move(currentMovent);    // Aplica movimiento
 
         // Control de la rotacion del personaje
+
         if (move != Vector3.zero)
         {
             isMoving = true;
@@ -42,6 +44,30 @@ public class PlayerController : MonoBehaviour
         else
         {
             isMoving = true;
+        }
+    }
+
+    public void PickUp(InputAction.CallbackContext callbackContext)
+    {
+        if (callbackContext.performed)
+        {
+            Debug.Log("PickUp");
+        }
+    }
+
+    public void Dash(InputAction.CallbackContext callbackContext)
+    {
+        if (callbackContext.performed)
+        {
+            Debug.Log("Dash");
+        }
+    }
+
+    public void Interactuar(InputAction.CallbackContext callbackContext)
+    {
+        if (callbackContext.performed)
+        {
+            Debug.Log("Interactuar");
         }
     }
 
