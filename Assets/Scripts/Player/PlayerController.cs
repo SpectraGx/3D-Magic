@@ -47,14 +47,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void PickUp(InputAction.CallbackContext callbackContext)
-    {
-        if (callbackContext.performed)
-        {
-            Debug.Log("PickUp");
-        }
-    }
-
     public void Dash(InputAction.CallbackContext callbackContext)
     {
         if (callbackContext.performed)
