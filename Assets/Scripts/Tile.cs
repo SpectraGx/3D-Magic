@@ -10,7 +10,7 @@ public abstract class Tile : MonoBehaviour
     [SerializeField] protected Transform itemAnchor;
     [Header("Referencia")]
     [SerializeField] protected Item initialItem;
-    [Header("Privadas")]
+    [Header("Variables Privadas")]
     private MeshRenderer meshRenderer;
     protected Item item;
     protected Action onActionComplete;
