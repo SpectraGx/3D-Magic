@@ -25,6 +25,7 @@ public abstract class Tile : MonoBehaviour
     }
 
     //          METODOS PUBLICOS
+    //          CAMBIAR ESTO PARA CORTAR
 
     public virtual void TakeAction(PlayerInteraction owner, Item playerItem, Action _onActionComplete)
     {

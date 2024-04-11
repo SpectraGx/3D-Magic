@@ -84,18 +84,30 @@ public class PlayerInteraction : MonoBehaviour
 
     public void PickUp(InputAction.CallbackContext callbackContext)
     {
-        if (callbackContext.performed)
+        if (closestTile && callbackContext.performed)
         {
             closestTile.TakeAction(this, item, RecogerAnim);
             Debug.Log("Recoger");
         }
-        if (callbackContext.canceled)
+         /*if (callbackContext.canceled)
         {
             closestTile.ActionComplete();
+        }*/
+    }
+
+    public void Interactuar (InputAction.CallbackContext callbackContext){
+        if (closestTile && callbackContext.performed){
+            closestTile.TakeAction(this,null,Cut);
+            Debug.Log("Interactuar");
         }
     }
 
-    public void RecogerAnim(){
+    public void Cut(){
+        Debug.Log("Cortar");
+    }
+    
+    public void RecogerAnim()
+    {
 
     }
 }

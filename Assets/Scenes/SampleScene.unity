@@ -187,8 +187,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 46279967}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.58531153, y: 0, z: 0, w: 0.81080854}
-  m_LocalPosition: {x: 0, y: 26.34, z: -9.21}
+  m_LocalRotation: {x: 0.46788725, y: 0.00000025655527, z: -0.0000019794293, w: 0.8837882}
+  m_LocalPosition: {x: 0.42896628, y: 19.5, z: -15.5469265}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -799,8 +799,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.58531153, y: 0, z: 0, w: 0.81080854}
-  m_LocalPosition: {x: 0, y: 26.34, z: -9.21}
+  m_LocalRotation: {x: 0.46788725, y: 0.00000025655527, z: -0.0000019794293, w: 0.8837882}
+  m_LocalPosition: {x: 0.42896628, y: 19.5, z: -15.5469265}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -964,7 +964,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4896430207024038614, guid: ff75b3b3e09fe9548810263e7ac912ca,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1341828348}
+      addedObject: {fileID: 1341828353}
   m_SourcePrefab: {fileID: 100100000, guid: ff75b3b3e09fe9548810263e7ac912ca, type: 3}
 --- !u!4 &347264621 stripped
 Transform:
@@ -3447,8 +3447,8 @@ MonoBehaviour:
     m_ActionName: Player/New action
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1156816840}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+      - m_Target: {fileID: 1156816847}
+        m_TargetAssemblyTypeName: PlayerInteraction, Assembly-CSharp
         m_MethodName: Interactuar
         m_Mode: 0
         m_Arguments:
@@ -3751,7 +3751,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 347264620}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1341828348
+--- !u!114 &1341828353
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3766,11 +3766,7 @@ MonoBehaviour:
   skinnedMeshRenderer: {fileID: 0}
   itemAnchor: {fileID: 1690253847}
   initialItem: {fileID: 0}
-  meshRenderer: {fileID: 0}
-  item: {fileID: 0}
   timeToCut: 3
-  _timeToCut: 0
-  _isCutting: 0
 --- !u!1001 &1380824634
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4877,6 +4873,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1685224569}
     m_Modifications:
+    - target: {fileID: 93540367669028870, guid: 40c0657850d535e4386c77154fa7a0c4,
+        type: 3}
+      propertyPath: ingredientData
+      value: 
+      objectReference: {fileID: 11400000, guid: 349f443259a27314095983994ce35cf8,
+        type: 2}
+    - target: {fileID: 93540367669028870, guid: 40c0657850d535e4386c77154fa7a0c4,
+        type: 3}
+      propertyPath: nextIngredientData
+      value: 
+      objectReference: {fileID: 11400000, guid: 531f4ca10ae647d4bbe4c8d89f2b3496,
+        type: 2}
     - target: {fileID: 2720244449784151792, guid: 40c0657850d535e4386c77154fa7a0c4,
         type: 3}
       propertyPath: m_Name

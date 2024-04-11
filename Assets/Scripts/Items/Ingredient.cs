@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class Ingredient : Item
 {
-    /*
-        // Serialized *****
+    
+    [Header("Inspector: Scriptables")]
     [SerializeField] private IngredientData ingredientData;
     [SerializeField] private IngredientData nextIngredientData;
     
-    // Private *****
+    [Header("Variable Privada")]
     private MeshFilter _mesh;
 
-    // Public Methods *****
+    // Metodo Publico
 
     public bool CanBeCut() => ingredientData.ingredientType == IngredientType.Raw;
     public IngredientData GetIngredientData() => ingredientData;
     public IngredientData GetNextIngredientData() => nextIngredientData;
-    */
+    
 }

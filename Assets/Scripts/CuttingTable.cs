@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-  /*
+  
 public class CuttingTable : Tile
 {
   
@@ -83,4 +83,4 @@ public class CuttingTable : Tile
     }
    
 }
- */
+ 
