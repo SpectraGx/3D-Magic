@@ -15,7 +15,7 @@ public abstract class Tile : MonoBehaviour
     protected Item item;
     protected Action onActionComplete;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         meshRenderer = GetComponent<MeshRenderer>();
         if (initialItem)
