@@ -30,8 +30,8 @@ public class PlayerController : MonoBehaviour
     private void ControllerMovement()
     {
         Vector3 move = new Vector3(input.x, 0, input.y);    // Entradas de teclado
-        currentMovent = move * (Time.deltaTime * speed);     // Normaliza la velocidad por el tiempo
-        characterController.Move(currentMovent);    // Aplica movimiento
+        currentMovent = move * (Time.deltaTime * speed);    // Normaliza la velocidad por el tiempo
+        characterController.Move(currentMovent);            // Aplica movimiento
 
         // Control de la rotacion del personaje
 
