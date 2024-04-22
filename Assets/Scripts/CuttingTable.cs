@@ -39,7 +39,7 @@ public class CuttingTable : Tile
     {
         onActionComplete = _onActionComplete;
 
-        if (playerItem & !item)
+        if (playerItem && !item)
         {
             if (GrabItem(playerItem)) owner.DropItem();
         }
