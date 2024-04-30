@@ -5,147 +5,142 @@ using UnityEngine;
 
 public class Cauldron : Item
 {
-    
-    // Public *****
+
+    //          ESTADOS DEL CALDERO
     public enum CauldronState
     {
-        Empty, // Applies if its not full
-        RawValidRecipe, 
-        Cooking, // Change to this state depends on Stove
+        Empty,              // Si no esta llena
+        RawValidRecipe,
+        Cooking,            // Cambio de estado dependiendo la fogata
         Cooked,
         CookedCooking,
         Burned
     }
-    // Public *****
+    [Header("Evento publico")]
     public EventHandler<Cauldron> OnFullAndValidRecipe;
-    
-    // Serialized
-    [Header("Cauldron")]
+
+    [Header("Bonfire")]
     [SerializeField] private int maxCapacity = 1;
-    // TODO: Change this to a list
+    // CAMBIAR A LISTA
     [SerializeField] private RecipeData recipe;
     [SerializeField] private ParticleSystem steamParticles;
-    
-    [Header("Pot")]
-    //TODO: CHANGE TO a specific pot class
+
+    [Header("Cauldron")]
+    // CAMBIAR A CLASE DE CALDERO
     [SerializeField] private Transform potSoup;
     [SerializeField] private Vector2 yMinMaxPotSoup;
     //[SerializeField] private ProgressUI _progressUI;
 
-    // Private *****
-    private CauldronState _CauldronState;
-    private List<IngredientData> _IngredientDataList = new List<IngredientData>();
-    private float _CauldronTimer;
+    [Header("Variables privadas")]
+    private CauldronState cauldronState;
+    private List<IngredientData> ingredientsDataList = new List<IngredientData>();
+    private float cauldronTimer;
 
-    // MonoBehavior Callbacks *****
 
     private void Start()
     {
         potSoup.position = new Vector3(potSoup.position.x, yMinMaxPotSoup.x, potSoup.position.z);
     }
 
-    // Private Methods *****
     private void Update()
     {
         if (!IsCooking()) return;
-        
-        _CauldronTimer -= Time.deltaTime;
 
-        if (_CauldronState == CauldronState.Cooking)
+        cauldronTimer -= Time.deltaTime;
+
+        if (cauldronState == CauldronState.Cooking)
         {
-            OnItemProgressChange?.Invoke(this, _CauldronTimer/ recipe.cookingTime);
+            OnItemProgressChange?.Invoke(this, cauldronTimer / recipe.cookingTime);
         }
-        
-        if (!(_CauldronTimer <= 0)) return;
-        
-        switch (_CauldronState)
+
+        if (!(cauldronTimer <= 0)) return;
+
+        switch (cauldronState)
         {
             case CauldronState.Cooking:
                 steamParticles.Play();
-                _CauldronState = CauldronState.CookedCooking;
-                _CauldronTimer = 5; // 5 seconds to burn
+                cauldronState = CauldronState.CookedCooking;
+                cauldronTimer = 5; // 5 seconds to burn
                 break;
             case CauldronState.CookedCooking:
-                Debug.Log("your comnida is burn");
-                _CauldronState = CauldronState.Burned;
+                Debug.Log("La poción ya no es bebible");
+                cauldronState = CauldronState.Burned;
                 break;
         }
     }
-    
-    // Private MEthods *****
+
+    //          METODO PRIVADO
     private float GetSoupLevel()
     {
-        float percentage = (float)_IngredientDataList.Count / maxCapacity;
+        float percentage = (float)ingredientsDataList.Count / maxCapacity;
         float limit = yMinMaxPotSoup.x + yMinMaxPotSoup.y;
 
         return percentage * limit;
     }
 
 
-    // Public Methods *****
-    public bool AddFood(IngredientData IngredientData)
+    //          METODOS PUBLICOS
+    public bool AddFood(IngredientData ingredientData)
     {
-        if (_IngredientDataList.Count >= maxCapacity || IngredientData.ingredientType != IngredientType.Processed) return false;
-        
-        _IngredientDataList.Add(IngredientData);
+        if (ingredientsDataList.Count >= maxCapacity || ingredientData.ingredientType != IngredientType.Processed) return false;
+
+        ingredientsDataList.Add(ingredientData);
         potSoup.localPosition = new Vector3(potSoup.localPosition.x, GetSoupLevel(), potSoup.localPosition.z);
-        
-        //CauldronFull
-        if (_IngredientDataList.Count >= maxCapacity)
+
+        // Si el caldero esta lleno
+        if (ingredientsDataList.Count >= maxCapacity)
         {
-            // TODO: Check if is a valid recipe
-            _CauldronState = CauldronState.RawValidRecipe;
+            // Comprueba que sea una poción valida
+            cauldronState = CauldronState.RawValidRecipe;
             OnFullAndValidRecipe?.Invoke(this, this);
         }
-        
+
         return true;
     }
 
     public void StartCook()
     {
-        if(_CauldronState == CauldronState.RawValidRecipe)
+        if (cauldronState == CauldronState.RawValidRecipe)
         {
-            _CauldronState = CauldronState.Cooking;
-            _CauldronTimer = recipe.cookingTime;
-            
-            /*
-            ProgressUI progressUI = Instantiate(_progressUI);
-            progressUI.transform.SetParent(GameObject.FindGameObjectWithTag("CanvasInteraction").transform);
-            progressUI.Set(this);
-            */
-            
+            cauldronState = CauldronState.Cooking;
+            cauldronTimer = recipe.cookingTime;
+
+            //ProgressUI progressUI = Instantiate(_progressUI);
+            //progressUI.transform.SetParent(GameObject.FindGameObjectWithTag("CanvasInteraction").transform);
+            //progressUI.Set(this);
+
         }
-        else if (_CauldronState == CauldronState.Cooked)
+        else if (cauldronState == CauldronState.Cooked)
         {
-            _CauldronState = CauldronState.CookedCooking;
-            _CauldronTimer = 5f;
+            cauldronState = CauldronState.CookedCooking;
+            cauldronTimer = 5f;
         }
     }
 
     public void StopCook()
     {
-        if(_CauldronState == CauldronState.Cooking) _CauldronState = CauldronState.RawValidRecipe;
-        else if (_CauldronState == CauldronState.CookedCooking) _CauldronState = CauldronState.Cooked;
+        if (cauldronState == CauldronState.Cooking) cauldronState = CauldronState.RawValidRecipe;
+        else if (cauldronState == CauldronState.CookedCooking) cauldronState = CauldronState.Cooked;
     }
 
     public bool CanBeCooked() =>
-        (_CauldronState == CauldronState.RawValidRecipe || _CauldronState == CauldronState.Cooked);
-    
-    private bool IsCooking() => (_CauldronState == CauldronState.Cooking || _CauldronState == CauldronState.CookedCooking);
+        (cauldronState == CauldronState.RawValidRecipe || cauldronState == CauldronState.Cooked);
 
-    public bool TryGetDish(out IngredientData foodCooked)
+    private bool IsCooking() => (cauldronState == CauldronState.Cooking || cauldronState == CauldronState.CookedCooking);
+
+    public bool TryGetDish(out IngredientData potionPrepared)
     {
-        if (_CauldronState == CauldronState.Cooked)
+        if (cauldronState == CauldronState.Cooked)
         {
-            foodCooked = recipe.result;
-            _IngredientDataList.Clear();
-            _CauldronState = CauldronState.Empty;
+            potionPrepared = recipe.result;
+            ingredientsDataList.Clear();
+            cauldronState = CauldronState.Empty;
             steamParticles.Stop();
             potSoup.localPosition = new Vector3(potSoup.localPosition.x, GetSoupLevel(), potSoup.localPosition.z);
             return true;
         }
 
-        foodCooked = null;
+        potionPrepared = null;
         return false;
     }
 }

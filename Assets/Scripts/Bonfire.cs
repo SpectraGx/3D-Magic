@@ -2,24 +2,24 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-/*
+
 public class Bonfire : Tile
 {
-    /*
-    // Public Methods *****
+    
+    //          METODO PUBLICO
     public override void ActionComplete()
     {
         //throw new System.NotImplementedException();
     }
 
-    // Private Methods *****
+    //          METODOS PRIVADOS
     protected override bool GrabItem(Item _item)
     {
-        bool canGrabItem = base.GrabItem(item);
-        if (canGrabItem && _item.TryGetComponent(out Cauldron cookware))
+        bool canGrabItem = base.GrabItem(_item);
+        if (canGrabItem && item.TryGetComponent(out Cauldron cauldron))
         {
-            cookware.OnFullAndValidRecipe += Cookware_OnFullAndValidRecipe;
-            if(cookware.CanBeCooked()) StartCook(cookware);
+            cauldron.OnFullAndValidRecipe += Cookware_OnFullAndValidRecipe;
+            if(cauldron.CanBeCooked()) StartCook(cauldron);
         }
 
         return canGrabItem;
@@ -27,23 +27,23 @@ public class Bonfire : Tile
 
     protected override void DropItem()
     {
-        if (item.TryGetComponent(out Cauldron cookware))
+        if (item.TryGetComponent(out Cauldron cauldron))
         {
-            cookware.OnFullAndValidRecipe -= Cookware_OnFullAndValidRecipe;
-            cookware.StopCook();
+            cauldron.OnFullAndValidRecipe -= Cookware_OnFullAndValidRecipe;
+            cauldron.StopCook();
         }
         base.DropItem();
     }
 
-    private void Cookware_OnFullAndValidRecipe(object sender, Cauldron cookware)
+    private void Cookware_OnFullAndValidRecipe(object sender, Cauldron cauldron)
     {
-        StartCook(cookware);
+        StartCook(cauldron);
     }
 
-    private void StartCook(Cookware cookware)
+    private void StartCook(Cauldron cauldron)
     {
-        Debug.Log("Stove try to start cook");
-        cookware.StartCook();
+        Debug.Log("El caldero intenta preparar");
+        cauldron.StartCook();
     }
 
     protected override void TakeAdvanceAction(PlayerInteraction owner)
@@ -52,4 +52,4 @@ public class Bonfire : Tile
     }
     
 }
-*/
+
