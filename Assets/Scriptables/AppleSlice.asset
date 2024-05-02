@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9092c9defc3ab743a18830a4e55d672, type: 3}
   m_Name: AppleSlice
   m_EditorClassIdentifier: 
-  itemName: 
+  itemName: ManzanaSlice
   itemSprite: {fileID: 0}
   ingredientType: 1
-  prefab: {fileID: 0}
+  prefab: {fileID: 7405319560807826108, guid: cee843c2a520bb44ab789fd317ba2e68, type: 3}

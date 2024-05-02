@@ -22,13 +22,13 @@ public class Cauldron : Item
     [Header("Bonfire")]
     [SerializeField] private int maxCapacity = 1;
     // CAMBIAR A LISTA
-    [SerializeField] private RecipeData recipe;
+    [SerializeField] private RecipeData bottle;
     [SerializeField] private ParticleSystem steamParticles;
 
     [Header("Cauldron")]
     // CAMBIAR A CLASE DE CALDERO
-    [SerializeField] private Transform potSoup;
-    [SerializeField] private Vector2 yMinMaxPotSoup;
+    [SerializeField] private Transform potion;
+    [SerializeField] private Vector2 yMinMaxPotion;
     //[SerializeField] private ProgressUI _progressUI;
 
     [Header("Variables privadas")]
@@ -39,7 +39,7 @@ public class Cauldron : Item
 
     private void Start()
     {
-        potSoup.position = new Vector3(potSoup.position.x, yMinMaxPotSoup.x, potSoup.position.z);
+        potion.position = new Vector3(potion.position.x, yMinMaxPotion.x, potion.position.z);
     }
 
     private void Update()
@@ -50,7 +50,7 @@ public class Cauldron : Item
 
         if (cauldronState == CauldronState.Cooking)
         {
-            OnItemProgressChange?.Invoke(this, cauldronTimer / recipe.cookingTime);
+            OnItemProgressChange?.Invoke(this, cauldronTimer / bottle.cookingTime);
         }
 
         if (!(cauldronTimer <= 0)) return;
@@ -73,7 +73,7 @@ public class Cauldron : Item
     private float GetSoupLevel()
     {
         float percentage = (float)ingredientsDataList.Count / maxCapacity;
-        float limit = yMinMaxPotSoup.x + yMinMaxPotSoup.y;
+        float limit = yMinMaxPotion.x + yMinMaxPotion.y;
 
         return percentage * limit;
     }
@@ -85,7 +85,7 @@ public class Cauldron : Item
         if (ingredientsDataList.Count >= maxCapacity || ingredientData.ingredientType != IngredientType.Processed) return false;
 
         ingredientsDataList.Add(ingredientData);
-        potSoup.localPosition = new Vector3(potSoup.localPosition.x, GetSoupLevel(), potSoup.localPosition.z);
+        potion.localPosition = new Vector3(potion.localPosition.x, GetSoupLevel(), potion.localPosition.z);
 
         // Si el caldero esta lleno
         if (ingredientsDataList.Count >= maxCapacity)
@@ -103,7 +103,7 @@ public class Cauldron : Item
         if (cauldronState == CauldronState.RawValidRecipe)
         {
             cauldronState = CauldronState.Cooking;
-            cauldronTimer = recipe.cookingTime;
+            cauldronTimer = bottle.cookingTime;
 
             //ProgressUI progressUI = Instantiate(_progressUI);
             //progressUI.transform.SetParent(GameObject.FindGameObjectWithTag("CanvasInteraction").transform);
@@ -132,11 +132,11 @@ public class Cauldron : Item
     {
         if (cauldronState == CauldronState.Cooked)
         {
-            potionPrepared = recipe.result;
+            potionPrepared = bottle.result;
             ingredientsDataList.Clear();
             cauldronState = CauldronState.Empty;
             steamParticles.Stop();
-            potSoup.localPosition = new Vector3(potSoup.localPosition.x, GetSoupLevel(), potSoup.localPosition.z);
+            potion.localPosition = new Vector3(potion.localPosition.x, GetSoupLevel(), potion.localPosition.z);
             return true;
         }
 

@@ -6,7 +6,7 @@ using UnityEngine;
 public abstract class Tile : MonoBehaviour
 {
     [Header("Inspector")]
-    [SerializeField] private SkinnedMeshRenderer skinnedMeshRenderer;
+    [SerializeField] public SkinnedMeshRenderer skinnedMeshRenderer;
     [SerializeField] protected Transform itemAnchor;
     [Header("Referencia")]
     [SerializeField] protected Item initialItem;
