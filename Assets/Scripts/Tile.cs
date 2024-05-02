@@ -6,18 +6,18 @@ using UnityEngine;
 public abstract class Tile : MonoBehaviour
 {
     [Header("Inspector")]
-    [SerializeField] public SkinnedMeshRenderer skinnedMeshRenderer;
+    [SerializeField] private SkinnedMeshRenderer skinnedMeshRenderer;
+    [SerializeField] private MeshRenderer meshRenderer;
     [SerializeField] protected Transform itemAnchor;
     [Header("Referencia")]
     [SerializeField] protected Item initialItem;
     [Header("Variables Privadas")]
-    private MeshRenderer meshRenderer;
     protected Item item;
     protected Action onActionComplete;
 
     protected virtual void Awake()
     {
-        meshRenderer = GetComponent<MeshRenderer>();
+        meshRenderer = GetComponentInChildren<MeshRenderer>();
         if (initialItem)
         {
             GrabItem(initialItem);
