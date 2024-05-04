@@ -15,9 +15,12 @@ public abstract class Tile : MonoBehaviour
     protected Item item;
     protected Action onActionComplete;
 
+    private List<MeshRenderer> meshRenderers = new List<MeshRenderer>();
+
+
     protected virtual void Awake()
     {
-        meshRenderer = GetComponentInChildren<MeshRenderer>();
+        meshRenderers = new List<MeshRenderer>(GetComponentsInChildren<MeshRenderer>());
         if (initialItem)
         {
             GrabItem(initialItem);
@@ -46,50 +49,50 @@ public abstract class Tile : MonoBehaviour
 
     public void StartHighlight()
     {
-        if (meshRenderer)
+        foreach (var renderer in meshRenderers)
         {
-            for (int i = 0; i < meshRenderer.materials.Length; i++)
+            for (int i = 0; i < renderer.materials.Length; i++)
             {
-                Material[] materials;
-                (materials = meshRenderer.materials)[i].EnableKeyword("_EMISSION");
-                materials[i].globalIlluminationFlags = MaterialGlobalIlluminationFlags.AnyEmissive;
-                meshRenderer.materials[i].SetColor("_EmissionColor", new Color(0.2f, 0.2f, 0.2f));
+                var material = renderer.materials[i];
+                material.EnableKeyword("_EMISSION");
+                material.globalIlluminationFlags = MaterialGlobalIlluminationFlags.AnyEmissive;
+                material.SetColor("_EmissionColor", new Color(0.2f, 0.2f, 0.2f));
             }
         }
-        else if (skinnedMeshRenderer)
+
+        if (skinnedMeshRenderer != null)
         {
             for (int i = 0; i < skinnedMeshRenderer.materials.Length; i++)
             {
-                Material[] materials;
-                (materials = skinnedMeshRenderer.materials)[i].EnableKeyword("_EMISSION");
-                materials[i].globalIlluminationFlags = MaterialGlobalIlluminationFlags.AnyEmissive;
-                skinnedMeshRenderer.materials[i].SetColor("_EmissionColor", new Color(0.2f, 0.2f, 0.2f));
+                var material = skinnedMeshRenderer.materials[i];
+                material.EnableKeyword("_EMISSION");
+                material.globalIlluminationFlags = MaterialGlobalIlluminationFlags.AnyEmissive;
+                material.SetColor("_EmissionColor", new Color(0.2f, 0.2f, 0.2f));
             }
         }
     }
 
     public void StopHighlight()
     {
-        if (meshRenderer)
+        foreach (var renderer in meshRenderers)
         {
-            for (int i = 0; i < meshRenderer.materials.Length; i++)
+            for (int i = 0; i < renderer.materials.Length; i++)
             {
-                //meshRenderer.materials[i].color = _baseColors[i];
-                Material[] materials;
-                (materials = meshRenderer.materials)[i].DisableKeyword("_EMISSION");
-                materials[i].globalIlluminationFlags = MaterialGlobalIlluminationFlags.EmissiveIsBlack;
-                meshRenderer.materials[i].SetColor("_EmissionColor", Color.black);
+                var material = renderer.materials[i];
+                material.DisableKeyword("_EMISSION");
+                material.globalIlluminationFlags = MaterialGlobalIlluminationFlags.EmissiveIsBlack;
+                material.SetColor("_EmissionColor", Color.black);
             }
         }
-        else if (skinnedMeshRenderer)
+
+        if (skinnedMeshRenderer != null)
         {
             for (int i = 0; i < skinnedMeshRenderer.materials.Length; i++)
             {
-                //meshRenderer.materials[i].color = _baseColors[i];
-                Material[] materials;
-                (materials = skinnedMeshRenderer.materials)[i].DisableKeyword("_EMISSION");
-                materials[i].globalIlluminationFlags = MaterialGlobalIlluminationFlags.EmissiveIsBlack;
-                skinnedMeshRenderer.materials[i].SetColor("_EmissionColor", Color.black);
+                var material = skinnedMeshRenderer.materials[i];
+                material.DisableKeyword("_EMISSION");
+                material.globalIlluminationFlags = MaterialGlobalIlluminationFlags.EmissiveIsBlack;
+                material.SetColor("_EmissionColor", Color.black);
             }
         }
     }
