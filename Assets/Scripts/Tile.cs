@@ -6,106 +6,45 @@ using UnityEngine;
 public abstract class Tile : MonoBehaviour
 {
     [Header("Inspector")]
-    [SerializeField] private SkinnedMeshRenderer skinnedMeshRenderer;
-    [SerializeField] private MeshRenderer meshRenderer;
-    [SerializeField] protected Transform itemAnchor;
-    [Header("Referencia")]
+    [SerializeField] private Transform itemAnchor;
     [SerializeField] protected Item initialItem;
-    [Header("Variables Privadas")]
+
     protected Item item;
-    protected Action onActionComplete;
-
-    private List<MeshRenderer> meshRenderers = new List<MeshRenderer>();
-
 
     protected virtual void Awake()
     {
-        meshRenderers = new List<MeshRenderer>(GetComponentsInChildren<MeshRenderer>());
-        if (initialItem)
+        if (initialItem != null)
         {
             GrabItem(initialItem);
         }
     }
 
-    //          METODOS PUBLICOS
-    //          CAMBIAR ESTO PARA CORTAR
-
-    public virtual void TakeAction(PlayerInteraction owner, Item playerItem, Action _onActionComplete)
+    public virtual void Interact(PlayerInteraction player)
     {
-        onActionComplete = _onActionComplete;
-        if (!item && playerItem)
-        {
-            if (GrabItem(playerItem)) owner.DropItem();
-        }
-        else if (item && !playerItem)
-        {
-            if (owner.GrabItem(item)) DropItem();
-        }
-        else
-        {
-            TakeAdvanceAction(owner);
-        }
+        Debug.Log("Interact");
     }
 
-    public void StartHighlight()
+    public virtual void TakeAction(PlayerInteraction owner, Item playerItem)
     {
-        foreach (var renderer in meshRenderers)
+        if (item == null && playerItem != null)
         {
-            for (int i = 0; i < renderer.materials.Length; i++)
+            if (GrabItem(playerItem))
             {
-                var material = renderer.materials[i];
-                material.EnableKeyword("_EMISSION");
-                material.globalIlluminationFlags = MaterialGlobalIlluminationFlags.AnyEmissive;
-                material.SetColor("_EmissionColor", new Color(0.2f, 0.2f, 0.2f));
+                owner.DropItem();
             }
         }
-
-        if (skinnedMeshRenderer != null)
+        else if (item != null && playerItem == null)
         {
-            for (int i = 0; i < skinnedMeshRenderer.materials.Length; i++)
+            if (owner.GrabItem(item))
             {
-                var material = skinnedMeshRenderer.materials[i];
-                material.EnableKeyword("_EMISSION");
-                material.globalIlluminationFlags = MaterialGlobalIlluminationFlags.AnyEmissive;
-                material.SetColor("_EmissionColor", new Color(0.2f, 0.2f, 0.2f));
+                DropItem();
             }
         }
     }
-
-    public void StopHighlight()
-    {
-        foreach (var renderer in meshRenderers)
-        {
-            for (int i = 0; i < renderer.materials.Length; i++)
-            {
-                var material = renderer.materials[i];
-                material.DisableKeyword("_EMISSION");
-                material.globalIlluminationFlags = MaterialGlobalIlluminationFlags.EmissiveIsBlack;
-                material.SetColor("_EmissionColor", Color.black);
-            }
-        }
-
-        if (skinnedMeshRenderer != null)
-        {
-            for (int i = 0; i < skinnedMeshRenderer.materials.Length; i++)
-            {
-                var material = skinnedMeshRenderer.materials[i];
-                material.DisableKeyword("_EMISSION");
-                material.globalIlluminationFlags = MaterialGlobalIlluminationFlags.EmissiveIsBlack;
-                material.SetColor("_EmissionColor", Color.black);
-            }
-        }
-    }
-
-    public abstract void ActionComplete();
-
-    //          METODOS PRIVADOS    
-
-    protected abstract void TakeAdvanceAction(PlayerInteraction owner);
 
     protected virtual bool GrabItem(Item _item)
     {
-        if (item) return false;
+        if (item != null) return false;
 
         item = _item;
         item.transform.SetParent(itemAnchor, false);

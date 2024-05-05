@@ -6,25 +6,33 @@ using UnityEngine.InputSystem;
 
 public class PlayerInteraction : MonoBehaviour
 {
-    [Header("Inspector")]
     [SerializeField] private Transform itemAnchor;
-    private List<Tile> tileCloseList = new List<Tile>();
+    [SerializeField] private TileDetector tileDetector;
+
     private Tile closestTile;
     private Item item;
 
     private void Update()
     {
-        if (!closestTile) return;
+        // Obtiene el tile más cercano
+        closestTile = tileDetector.GetClosestTile(transform.position);
+
+        // Controla el brillo del tile más cercano
+        if (closestTile)
+        {
+            var highlighter = closestTile.GetComponent<TileHighlighter>();
+            if (highlighter)
+            {
+                highlighter.Highlight();
+            }
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out Tile tile) && !tileCloseList.Contains(tile))
+        if (other.TryGetComponent(out Tile tile))
         {
-            tileCloseList.Add(tile);
-
-            if (closestTile) closestTile.StopHighlight();
-            closestTile = GetCloserTile();
+            tileDetector.AddTile(tile);
         }
     }
 
@@ -32,43 +40,37 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (other.TryGetComponent(out Tile tile))
         {
-            tileCloseList.Remove(tile);
-            if (closestTile) closestTile.StopHighlight();
-            closestTile = GetCloserTile();
-        }
-    }
-
-    //          METODO PRIVADO
-
-    private Tile GetCloserTile()
-    {
-        if (tileCloseList.Count <= 0) return null;
-        Tile winnerTile = null;
-        float minDistance = Mathf.Infinity;
-        foreach (Tile tile in tileCloseList)
-        {
-            float newDistance = Vector3.Distance(transform.position, tile.transform.position);
-            if (newDistance <= minDistance)
+            var highlighter = tile.GetComponent<TileHighlighter>();
+            if (highlighter != null)
             {
-                winnerTile = tile;
-                minDistance = newDistance;
+                highlighter.RemoveHighlight();
             }
+            
+            tileDetector.RemoveTile(tile);
         }
-
-        if (winnerTile) winnerTile.StartHighlight();
-        return winnerTile;
     }
 
-
-    //          METODOS PUBLICOS
+    public void PickUp(InputAction.CallbackContext callbackContext)
+    {
+        if (closestTile && callbackContext.performed)
+        {
+            closestTile.TakeAction(this, item);
+        }
+    }
 
     public bool GrabItem(Item _item)
     {
         if (item) return false;
+
         item = _item;
         item.transform.SetParent(itemAnchor, false);
         item.transform.localPosition = Vector3.zero;
         return true;
+    }
+
+    public bool HasIngredientObject()
+    {
+        return item !=null;
     }
 
     public void DropItem()
@@ -76,41 +78,4 @@ public class PlayerInteraction : MonoBehaviour
         item = null;
     }
 
-    public void RemoveItem()
-    {
-        Destroy(item.gameObject);
-        DropItem();
-    }
-
-    public void PickUp(InputAction.CallbackContext callbackContext)
-    {
-        if (closestTile && callbackContext.performed)
-        {
-            closestTile.TakeAction(this, item, RecogerAnim);
-            Debug.Log("Recoger");
-        }
-        /*if (callbackContext.canceled)
-       {
-           closestTile.ActionComplete();
-       }*/
-    }
-
-    /*public void Interactuar(InputAction.CallbackContext callbackContext)
-    {
-        if (closestTile && callbackContext.performed)
-        {
-            closestTile.TakeAction(this, null, Cut);
-            Debug.Log("Interactuar");
-        }
-    }*/
-
-    public void Cut()
-    {
-        Debug.Log("Cortar");
-    }
-
-    public void RecogerAnim()
-    {
-
-    }
 }

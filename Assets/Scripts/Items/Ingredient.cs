@@ -17,5 +17,7 @@ public class Ingredient : Item
     public bool CanBeCut() => ingredientData.ingredientType == IngredientType.Raw;
     public IngredientData GetIngredientData() => ingredientData;
     public IngredientData GetNextIngredientData() => nextIngredientData;
+
+
     
 }
