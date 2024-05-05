@@ -40,6 +40,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Moler",
+                    "type": "Button",
+                    "id": "8c08adce-1f7d-4d46-9509-0cb5cadbae65",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -172,6 +181,17 @@
                     "processors": "",
                     "groups": "Keyboard",
                     "action": "Interactuar",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3ab3a1e8-0da1-4ce1-94e9-fb03bd84db5f",
+                    "path": "<Keyboard>/f",
+                    "interactions": "MultiTap(tapCount=5)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Moler",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

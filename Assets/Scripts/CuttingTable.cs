@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CuttingTable : Tile
+public class CuttingTable : Tile, UIProgress
 {/*
   
     [Header("Inspector")]
@@ -74,6 +74,7 @@ public class CuttingTable : Tile
     //      Remplaza el objeto actual por uno nuevo
     
     */
+    public event EventHandler<UIProgress.OnProgressChangedEventArgs> OnProgressChanged;
 
     [Header("Inspector")]
     [SerializeField] private float timeToCut = 3f;
@@ -94,6 +95,11 @@ public class CuttingTable : Tile
     {
         _isCutting = false;     // Deja de cortar
         cutTimer = 0;
+
+        OnProgressChanged?.Invoke(this, new UIProgress.OnProgressChangedEventArgs
+        {
+            progressNormalized = cutTimer
+        });
     }
 
     private void Update()
@@ -101,8 +107,19 @@ public class CuttingTable : Tile
         if (_isCutting) // Si esta cortando
         {
             cutTimer += Time.deltaTime; // Timer de cortar
+
+            OnProgressChanged?.Invoke(this, new UIProgress.OnProgressChangedEventArgs   // Llamar a la UI Progress
+            {
+                progressNormalized = cutTimer / timeToCut   // El Fill depende del tiempo que ha presionado el jugador y el tiempo para cortar
+            });
+
+            Debug.Log($"Tiempo de corte: {cutTimer:F2} segundos");
             if (cutTimer >= timeToCut)  // Si se mantuvo cortando la cantidad de tiempo necesitada
             {
+                OnProgressChanged?.Invoke(this, new UIProgress.OnProgressChangedEventArgs
+                {
+                    progressNormalized = timeToCut
+                });
                 // Remplazar por objeto cortado
                 if (item.TryGetComponent(out Ingredient ingredient) && CraftFood(ingredient.GetNextIngredientData()))
                 {
