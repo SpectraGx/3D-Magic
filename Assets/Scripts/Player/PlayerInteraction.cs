@@ -60,9 +60,21 @@ public class PlayerInteraction : MonoBehaviour
 
     public void Interactuar(InputAction.CallbackContext callbackContext)
     {
-        if (closestTile && callbackContext.performed)
+        /*if (closestTile && callbackContext.performed)
         {
             closestTile.Interact(this,item);
+        }*/
+
+        if (closestTile != null)
+        {
+            if (callbackContext.performed)
+            {
+                closestTile.OnInteractStart(this);
+            }
+            if (callbackContext.canceled)
+            {
+                closestTile.OnInteractStop(this);
+            }
         }
     }
 

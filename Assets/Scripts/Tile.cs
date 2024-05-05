@@ -42,6 +42,16 @@ public abstract class Tile : MonoBehaviour
         }
     }
 
+    public virtual void OnInteractStart(PlayerInteraction player)
+    {
+        Debug.Log("Inicia a interactuar");
+    }
+
+    public virtual void OnInteractStop(PlayerInteraction player)
+    {
+        Debug.Log("Ha parado de interactuar");
+    }
+
     protected virtual bool GrabItem(Item _item)
     {
         if (item != null) return false;

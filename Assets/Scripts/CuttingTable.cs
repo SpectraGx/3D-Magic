@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-  
+
 public class CuttingTable : Tile
 {/*
   
@@ -75,11 +75,52 @@ public class CuttingTable : Tile
     
     */
 
+    [Header("Inspector")]
+    [SerializeField] private float timeToCut = 3f;
+    [Header("Variables privadas")]
+    private float cutTimer = 0f;
+    private bool _isCutting = false;
+
+
+    public override void OnInteractStart(PlayerInteraction player)
+    {
+        if (item != null && item.TryGetComponent(out Ingredient ingredient) && ingredient.CanBeCut())
+        {
+            _isCutting = true;  // Empieza a cortar
+        }
+    }
+
+    public override void OnInteractStop(PlayerInteraction player)
+    {
+        _isCutting = false;     // Deja de cortar
+        cutTimer = 0;
+    }
+
+    private void Update()
+    {
+        if (_isCutting) // Si esta cortando
+        {
+            cutTimer += Time.deltaTime; // Timer de cortar
+            if (cutTimer >= timeToCut)  // Si se mantuvo cortando la cantidad de tiempo necesitada
+            {
+                // Remplazar por objeto cortado
+                if (item.TryGetComponent(out Ingredient ingredient) && CraftFood(ingredient.GetNextIngredientData()))
+                {
+                    Debug.Log("El ingrediente fue remplazado por uno cortado");
+                    _isCutting = false; // Reseteo de corte
+                    cutTimer = 0f;      // Reincio de timer
+                }
+            }
+        }
+    }
+
+
     public override void InteractPick(PlayerInteraction owner, Item playerItem)
     {
         base.InteractPick(owner, playerItem);
     }
 
+    /*
     public override void Interact(PlayerInteraction player, Item playerItem)
     {
         if (item != null && item.TryGetComponent(out Ingredient ingredient))
@@ -103,15 +144,15 @@ public class CuttingTable : Tile
             Debug.Log("La Cutting Table no tiene objeto");
         }
     }
+    */
 
     private bool CraftFood(IngredientData newIngredientData)
     {
         if (item == null) return false; // No reemplazar si no hay objeto
 
-        // Instancia el nuevo objeto usando el prefab de IngredientData
+        // Instancia usando el prefab de IngredientData
         GameObject newFoodClone = Instantiate(newIngredientData.prefab, item.transform.parent, false);
 
-        // Destruye el objeto anterior
         Destroy(item.gameObject);
 
         // Asigna el nuevo objeto como el actual
@@ -121,4 +162,3 @@ public class CuttingTable : Tile
     }
 
 }
- 
