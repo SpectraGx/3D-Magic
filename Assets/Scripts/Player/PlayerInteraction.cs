@@ -95,14 +95,14 @@ public class PlayerInteraction : MonoBehaviour
        }*/
     }
 
-    public void Interactuar(InputAction.CallbackContext callbackContext)
+    /*public void Interactuar(InputAction.CallbackContext callbackContext)
     {
         if (closestTile && callbackContext.performed)
         {
             closestTile.TakeAction(this, null, Cut);
             Debug.Log("Interactuar");
         }
-    }
+    }*/
 
     public void Cut()
     {
