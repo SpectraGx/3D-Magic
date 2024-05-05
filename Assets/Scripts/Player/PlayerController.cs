@@ -55,14 +55,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void Interactuar(InputAction.CallbackContext callbackContext)
-    {
-        if (callbackContext.performed)
-        {
-            Debug.Log("Interactuar");
-        }
-    }
-
     //  Metodo publico que indica si el personaje esta en movimiento o no
     public bool IsMoving() => isMoving;
 }

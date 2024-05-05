@@ -45,7 +45,7 @@ public class PlayerInteraction : MonoBehaviour
             {
                 highlighter.RemoveHighlight();
             }
-            
+
             tileDetector.RemoveTile(tile);
         }
     }
@@ -54,7 +54,15 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (closestTile && callbackContext.performed)
         {
-            closestTile.TakeAction(this, item);
+            closestTile.InteractPick(this, item);
+        }
+    }
+
+    public void Interactuar(InputAction.CallbackContext callbackContext)
+    {
+        if (closestTile && callbackContext.performed)
+        {
+            closestTile.Interact(this,item);
         }
     }
 
@@ -70,7 +78,7 @@ public class PlayerInteraction : MonoBehaviour
 
     public bool HasIngredientObject()
     {
-        return item !=null;
+        return item != null;
     }
 
     public void DropItem()

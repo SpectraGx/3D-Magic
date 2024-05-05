@@ -19,12 +19,12 @@ public abstract class Tile : MonoBehaviour
         }
     }
 
-    public virtual void Interact(PlayerInteraction player)
+    public virtual void Interact(PlayerInteraction player, Item playerItem)
     {
         Debug.Log("Interact");
     }
 
-    public virtual void TakeAction(PlayerInteraction owner, Item playerItem)
+    public virtual void InteractPick(PlayerInteraction owner, Item playerItem)
     {
         if (item == null && playerItem != null)
         {

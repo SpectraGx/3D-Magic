@@ -9,7 +9,7 @@ public class IngredientBox : Tile
     public EventHandler OnPlayerGrabbedIngredient;
     [SerializeField] private IngredientData ingredientItem;
 
-    public override void TakeAction(PlayerInteraction player, Item playerItem)
+    public override void InteractPick(PlayerInteraction player, Item playerItem)
     {
         if (player.HasIngredientObject()) return; // No instanciar si el jugador ya tiene un objeto
 

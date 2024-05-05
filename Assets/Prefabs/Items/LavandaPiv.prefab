@@ -212,7 +212,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ingredientData: {fileID: 11400000, guid: 869929d27e7442b42b30b7b2386464cd, type: 2}
-  nextIngredientData: {fileID: 0}
+  nextIngredientData: {fileID: 11400000, guid: 263cb15072c3cc24bb2bbd409669e364, type: 2}
 --- !u!1 &9055771953819390888
 GameObject:
   m_ObjectHideFlags: 0

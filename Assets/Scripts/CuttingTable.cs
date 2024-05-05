@@ -1,10 +1,10 @@
-/*using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
   
 public class CuttingTable : Tile
-{
+{/*
   
     [Header("Inspector")]
     [SerializeField] private float timeToCut = 3;
@@ -72,15 +72,53 @@ public class CuttingTable : Tile
     }
 
     //      Remplaza el objeto actual por uno nuevo
+    
+    */
+
+    public override void InteractPick(PlayerInteraction owner, Item playerItem)
+    {
+        base.InteractPick(owner, playerItem);
+    }
+
+    public override void Interact(PlayerInteraction player, Item playerItem)
+    {
+        if (item != null && item.TryGetComponent(out Ingredient ingredient))
+        {
+            // Verifica si el ingrediente puede ser cortado
+            if (ingredient.CanBeCut())
+            {
+                // Reemplaza el objeto actual con uno nuevo usando CraftFood
+                if (CraftFood(ingredient.GetNextIngredientData()))
+                {
+                    Debug.Log("El ingrediente fue remplazado por uno cortado");
+                }
+            }
+            else
+            {
+                Debug.Log("El ingrediente no puede ser cortado");
+            }
+        }
+        else
+        {
+            Debug.Log("La Cutting Table no tiene objeto");
+        }
+    }
+
     private bool CraftFood(IngredientData newIngredientData)
     {
-        if (!item) return false;
+        if (item == null) return false; // No reemplazar si no hay objeto
 
+        // Instancia el nuevo objeto usando el prefab de IngredientData
         GameObject newFoodClone = Instantiate(newIngredientData.prefab, item.transform.parent, false);
+
+        // Destruye el objeto anterior
         Destroy(item.gameObject);
+
+        // Asigna el nuevo objeto como el actual
         item = newFoodClone.GetComponent<Item>();
-        return true;
+
+        return true; // Devuelve true para indicar que se reemplazó con éxito
     }
-   
+
 }
- */
+ 
