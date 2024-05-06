@@ -5,7 +5,7 @@ using System;
 
 public class GameManager : MonoBehaviour
 {
-    [Header("Singleton")]
+   /*  [Header("Singleton")]
     public static GameManager Instance;
 
     private void Awake()
@@ -100,5 +100,5 @@ public class GameManager : MonoBehaviour
     public void SuccessOrder()
     {
         OnOrderSuccess?.Invoke(this, EventArgs.Empty);
-    }
+    } */
 }
