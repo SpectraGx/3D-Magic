@@ -17,5 +17,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 90733f3ec213fd14ebe5c409e9bb92a8, type: 2}
   - {fileID: 11400000, guid: 263cb15072c3cc24bb2bbd409669e364, type: 2}
   recipeName: "Poci\xF3n manzanas y lavanda"
-  result: {fileID: 11400000, guid: 8d640ac3a48bcf94db50fa9fa77c2810, type: 2}
+  result: {fileID: 11400000, guid: 80cc337ea5d7c8448b137f6c26f0ff76, type: 2}
   cookingTime: 4

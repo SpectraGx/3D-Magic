@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8535292694292626141}
   - component: {fileID: 2106715360870691633}
   m_Layer: 0
-  m_Name: RellenoRojo
+  m_Name: RellenoAll
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: cbdf33fbfd4d44749976e64a376a11cd, type: 2}
+  - {fileID: 2100000, guid: c4579ffbf568d2648a22e64cebff0218, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -96,5 +96,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 037f633840723464ea940914c85aa2de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ingredientData: {fileID: 11400000, guid: 80cc337ea5d7c8448b137f6c26f0ff76, type: 2}
+  ingredientData: {fileID: 11400000, guid: 6c91aec789267a2458f59deb0e392652, type: 2}
   nextIngredientData: {fileID: 0}

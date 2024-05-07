@@ -16,6 +16,7 @@ public class RecipeListData : ScriptableObject
             {
                 return recipe; // Devuelve la receta correspondiente
             }
+            //Debug.Log($"El ingrediente puesto es {ingredientDatas.itemName} segundos");
         }
         return null; // No se encontró ninguna receta que coincida
     }

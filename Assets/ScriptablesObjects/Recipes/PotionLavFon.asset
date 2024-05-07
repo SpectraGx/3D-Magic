@@ -17,5 +17,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 263cb15072c3cc24bb2bbd409669e364, type: 2}
   - {fileID: 11400000, guid: d1a61f178a9e1794c919945c3d73b3a9, type: 2}
   recipeName: Pocion lavandas y hongo
-  result: {fileID: 0}
+  result: {fileID: 11400000, guid: 8d640ac3a48bcf94db50fa9fa77c2810, type: 2}
   cookingTime: 5

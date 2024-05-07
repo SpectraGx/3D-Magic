@@ -168,6 +168,7 @@ public class Cauldron : Tile, UIProgress
     private float cookingTimer;
     [SerializeField] private RecipeData activeRecipe; // La receta activa
 
+
     public override void Awake()
     {
         base.Awake();
@@ -269,6 +270,11 @@ public class Cauldron : Tile, UIProgress
         state = State.Completed; // Cambia al estado Completed
 
         Debug.Log("El caldero ha completado la cocción y ha creado una poción.");
+
+        OnProgressChanged?.Invoke(this, new UIProgress.OnProgressChangedEventArgs
+        {
+            progressNormalized = 0
+        });
     }
 
     protected override bool GrabItem(Item newItem)
