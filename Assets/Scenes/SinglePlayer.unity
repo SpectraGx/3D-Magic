@@ -1196,6 +1196,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &438017972
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 438017973}
+  m_Layer: 0
+  m_Name: ItemAnchorResult
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &438017973
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 438017972}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 793959617}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &510119142
 GameObject:
   m_ObjectHideFlags: 0
@@ -2522,6 +2553,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1030303987}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9e00b778eaea52b4e8472ec3ae5fa140,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 438017973}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9e00b778eaea52b4e8472ec3ae5fa140,
         type: 3}
@@ -2618,18 +2653,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddf28c132bc8d8d4d96c18c30b73c2f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemAnchor: {fileID: 0}
+  itemAnchor: {fileID: 438017973}
   initialItem: {fileID: 0}
   validIngredientDataList:
   - {fileID: 11400000, guid: 90733f3ec213fd14ebe5c409e9bb92a8, type: 2}
   - {fileID: 11400000, guid: d1a61f178a9e1794c919945c3d73b3a9, type: 2}
   - {fileID: 11400000, guid: 263cb15072c3cc24bb2bbd409669e364, type: 2}
+  recipeList: {fileID: 11400000, guid: f6e9d757dce30a548b252ac14e33aa86, type: 2}
   itemAnchors:
   - {fileID: 2077570488}
   - {fileID: 1354761913}
   - {fileID: 172171104}
-  potionResult: {fileID: 11400000, guid: 735020a26aaf5cf4780e5e40f9393d07, type: 2}
-  cookingTime: 5
+  activeRecipe: {fileID: 0}
 --- !u!1 &795403740
 GameObject:
   m_ObjectHideFlags: 0

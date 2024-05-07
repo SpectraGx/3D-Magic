@@ -5,6 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "New Recipe")]
 public class RecipeData : ScriptableObject
 {
-   public List <IngredientData> ingredientDatas;
+   public List<IngredientData> ingredientDatas;
    public string recipeName;
+   public IngredientData result;
+   public int cookingTime;
 }
