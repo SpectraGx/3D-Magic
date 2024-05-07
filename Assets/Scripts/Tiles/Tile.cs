@@ -11,7 +11,7 @@ public abstract class Tile : MonoBehaviour
 
     protected Item item;
 
-    protected virtual void Awake()
+    public virtual void Awake()
     {
         if (initialItem != null)
         {
