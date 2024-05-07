@@ -18,6 +18,14 @@ public class Ingredient : Item
     public IngredientData GetIngredientData() => ingredientData;
     public IngredientData GetNextIngredientData() => nextIngredientData;
 
+    public void DestroySelf(){
+        Destroy(gameObject);
+    }
 
+    public static Ingredient SpawnIngredientObject(IngredientData ingredientData, Transform parent){
+        GameObject newPotion = Instantiate(ingredientData.prefab, parent);
+        Ingredient ingredient = newPotion.GetComponent<Ingredient>();
+        return ingredient;
+    }
     
 }

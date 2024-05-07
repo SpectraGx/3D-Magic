@@ -2533,6 +2533,8 @@ MonoBehaviour:
   - {fileID: 2077570488}
   - {fileID: 1354761913}
   - {fileID: 172171104}
+  potionResult: {fileID: 11400000, guid: 735020a26aaf5cf4780e5e40f9393d07, type: 2}
+  cookingTime: 5
 --- !u!1 &795403740
 GameObject:
   m_ObjectHideFlags: 0

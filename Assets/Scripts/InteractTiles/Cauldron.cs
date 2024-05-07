@@ -3,23 +3,115 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Cauldron : Tile
+public class Cauldron : Tile, UIProgress
 {
-    /* public event EventHandler<OnIngredientAddedEventArgs> onIngredientAdded;
-    public class OnIngredientAddedEventArgs : EventArgs
+    public enum State
     {
-        public IngredientData ingredientData;
-    } */
+        Idle,
+        Cooking,
+        Completed
+    }
+
+    public event EventHandler<UIProgress.OnProgressChangedEventArgs> OnProgressChanged;
 
     [Header("Inspector")]
     [SerializeField] private List<IngredientData> validIngredientDataList;
     [SerializeField] private List<Transform> itemAnchors;
+    [SerializeField] private IngredientData potionResult; // Objeto final (Poción)
+    [SerializeField] private float cookingTime; // Tiempo máximo para cocinar
+
     private List<Item> items;
+    private State state;
+    private float cookingTimer;
 
     public override void Awake()
     {
         base.Awake();
         items = new List<Item>(itemAnchors.Count); // Inicializa la lista de objetos
+        state = State.Idle;
+        OnProgressChanged?.Invoke(this, new UIProgress.OnProgressChangedEventArgs   // Llamar a la UI Progress
+        {
+            progressNormalized = 0    // El Fill depende del tiempo de cocinar y el tiempo cocinado
+        });
+    }
+
+    public override void InteractPick(PlayerInteraction owner, Item playerItem)
+    {
+        if (state == State.Idle) // Solo permite agregar ingredientes cuando está en estado Idle
+        {
+            if (playerItem != null) // Si el jugador tiene un objeto
+            {
+                if (GrabItem(playerItem)) // Intentar agregar el objeto al caldero
+                {
+                    owner.DropItem(); // El jugador suelta el objeto
+                    Debug.Log("Ingrediente agregado al caldero");
+
+                    if (items.Count == itemAnchors.Count) // Si el caldero está lleno
+                    {
+                        StartCooking(); // Iniciar el proceso de cocción
+                    }
+                }
+                else
+                {
+                    Debug.Log("No se puede agregar el objeto al caldero.");
+                }
+            }
+            else
+            {
+                Debug.Log("No hay objeto para agregar.");
+            }
+        }
+        else
+        {
+            Debug.Log("El caldero está en proceso de cocción, no se pueden agregar ingredientes.");
+        }
+    }
+
+    private void StartCooking()
+    {
+        state = State.Cooking; // Cambia al estado Cooking
+        cookingTimer = 0f; // Restablece el temporizador
+        Debug.Log("El caldero está cocinando...");
+    }
+
+    private void Update()
+    {
+        if (state == State.Cooking) // Solo incrementa el temporizador si el caldero está cocinando
+        {
+            cookingTimer += Time.deltaTime;
+
+            OnProgressChanged?.Invoke(this, new UIProgress.OnProgressChangedEventArgs   // Llamar a la UI Progress
+            {
+                progressNormalized = cookingTimer / cookingTime   // El Fill depende del tiempo de cocinar y el tiempo cocinado
+            });
+
+            if (cookingTimer >= cookingTime) // Si el temporizador alcanza el tiempo máximo
+            {
+                OnProgressChanged?.Invoke(this, new UIProgress.OnProgressChangedEventArgs   // Llamar a la UI Progress
+                {
+                    progressNormalized = 0   // El Fill depende del tiempo de cocinar y el tiempo cocinado
+                });
+                CompleteCooking(); // Completar el proceso de cocción
+            }
+        }
+    }
+
+    private void CompleteCooking()
+    {
+        // Destruye los ingredientes anteriores
+        foreach (var item in items)
+        {
+            if (item != null)
+            {
+                item.GetComponent<Ingredient>().DestroySelf();
+            }
+        }
+
+        items.Clear(); // Limpia la lista de ingredientes
+        Ingredient.SpawnIngredientObject(potionResult, this.transform); // Instanciar el resultado final (Poción)   //
+
+        state = State.Completed; // Cambia al estado Completed
+        Debug.Log("El caldero ha completado la cocción y ha creado una poción.");
     }
 
     protected override bool GrabItem(Item newItem)
@@ -49,31 +141,10 @@ public class Cauldron : Tile
                     items[i] = newItem; // Reemplazar el objeto en esa posición
                 }
 
-                return true; // Indicar que se agregó con éxito
+                return true; // Indicar que el objeto fue agregado con éxito
             }
         }
 
         return false; // No hay espacio disponible
-    }
-
-    public override void InteractPick(PlayerInteraction owner, Item playerItem)
-    {
-        if (playerItem != null) // Si el jugador tiene un objeto
-        {
-            // Intentar agregar el objeto al caldero
-            if (GrabItem(playerItem))
-            {
-                owner.DropItem(); // El jugador suelta el objeto
-                Debug.Log("Ingrediente agregado al caldero");
-            }
-            else
-            {
-                Debug.Log("No se puede agregar el objeto al caldero.");
-            }
-        }
-        else
-        {
-            Debug.Log("No hay objeto para agregar.");
-        }
     }
 }
