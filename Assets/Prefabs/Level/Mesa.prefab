@@ -89,11 +89,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -804731622281664130, guid: b7bd571c4b565144397ab4dee0568c45,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 943eef8e11abe0b4aa50471523051777, type: 2}
+    - target: {fileID: -678588488315902003, guid: b7bd571c4b565144397ab4dee0568c45,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 00ff802b8a6f46e4198d5e99ad2cbbcd, type: 2}
     - target: {fileID: 919132149155446097, guid: b7bd571c4b565144397ab4dee0568c45,
         type: 3}
       propertyPath: m_Name
       value: Mesa
       objectReference: {fileID: 0}
+    - target: {fileID: 6745302439343835087, guid: b7bd571c4b565144397ab4dee0568c45,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 943eef8e11abe0b4aa50471523051777, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
