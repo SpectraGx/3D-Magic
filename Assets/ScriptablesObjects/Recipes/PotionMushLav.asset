@@ -12,5 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15ca44d7005c8044b86fe942df3e0429, type: 3}
   m_Name: PotionMushLav
   m_EditorClassIdentifier: 
-  ingredientDatas: []
+  ingredientDatas:
+  - {fileID: 11400000, guid: d1a61f178a9e1794c919945c3d73b3a9, type: 2}
+  - {fileID: 11400000, guid: d1a61f178a9e1794c919945c3d73b3a9, type: 2}
+  - {fileID: 11400000, guid: 263cb15072c3cc24bb2bbd409669e364, type: 2}
   recipeName: 
