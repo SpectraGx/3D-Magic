@@ -23,7 +23,14 @@ public class RecipeListData : ScriptableObject
 
     private bool RecipeMatches(RecipeData recipe, List<IngredientData> ingredientDatas)
     {
+        int check3 = 0;
         // Comprueba si todos los ingredientes de la receta están en la lista proporcionada
-        return recipe.ingredientDatas.All(ingredientDatas.Contains);
+        //return recipe.ingredientDatas.All(ingredientDatas.Contains);
+        for (int i = 0; i < ingredientDatas.Count; i++) {
+            if (recipe.ingredientDatas.Contains(ingredientDatas[i])){
+                check3++;
+            }
+        }
+        if (check3 == 3) { return true; } else { return false; }
     }
 }
