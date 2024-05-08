@@ -2312,6 +2312,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: CuttingTable Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 7500019549723115772, guid: 6bbac06e9949b6b48a6a32389f778a8c,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4060,7 +4065,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: e6be07ca4438bc342959ab019a6a1c59,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5152,6 +5157,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: fad15713b6d66c84a80b3438dd9e0480, type: 2}
+    - target: {fileID: 1832491416465278813, guid: 55d6e79648069ef4abac9e079415149e,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6477964112983056666, guid: 55d6e79648069ef4abac9e079415149e,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
