@@ -17,5 +17,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d1a61f178a9e1794c919945c3d73b3a9, type: 2}
   - {fileID: 11400000, guid: 90733f3ec213fd14ebe5c409e9bb92a8, type: 2}
   recipeName: Pocion hongos y manzana
-  result: {fileID: 11400000, guid: fb974d6368bfcfc4f871548988e67107, type: 2}
+  result: {fileID: 11400000, guid: 8cd7a2b4bd190624598a73b7e4f7aac8, type: 2}
   cookingTime: 4

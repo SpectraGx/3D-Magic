@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Relleno
   itemSprite: {fileID: 0}
-  ingredientType: 1
-  prefab: {fileID: 2949179937609753949, guid: 90535f7ce4db5094aad0458315d0e0ce, type: 3}
+  ingredientType: 2
+  prefab: {fileID: 2949179937609753949, guid: d75c45ea4ca03a44ebb6933a355bbcc9, type: 3}
