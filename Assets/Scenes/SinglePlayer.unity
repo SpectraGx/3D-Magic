@@ -221,6 +221,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ca702ee962254741b6383c5dbf43836, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bottleData: {fileID: 0}
+  bottleFill: {fileID: 0}
 --- !u!1001 &11590615
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1666,6 +1668,85 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 90514b2b89b1da449ad3b264b0afd6fb, type: 3}
+--- !u!1001 &595075506
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2623303594871114700, guid: c94be3b6198c5ac4ba8fa5bcf6677311,
+        type: 3}
+      propertyPath: m_Name
+      value: CajaBotellas
+      objectReference: {fileID: 0}
+    - target: {fileID: 3399100704591974774, guid: c94be3b6198c5ac4ba8fa5bcf6677311,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -11
+      objectReference: {fileID: 0}
+    - target: {fileID: 3399100704591974774, guid: c94be3b6198c5ac4ba8fa5bcf6677311,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3399100704591974774, guid: c94be3b6198c5ac4ba8fa5bcf6677311,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.912
+      objectReference: {fileID: 0}
+    - target: {fileID: 3399100704591974774, guid: c94be3b6198c5ac4ba8fa5bcf6677311,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 3399100704591974774, guid: c94be3b6198c5ac4ba8fa5bcf6677311,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3399100704591974774, guid: c94be3b6198c5ac4ba8fa5bcf6677311,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 3399100704591974774, guid: c94be3b6198c5ac4ba8fa5bcf6677311,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3399100704591974774, guid: c94be3b6198c5ac4ba8fa5bcf6677311,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3399100704591974774, guid: c94be3b6198c5ac4ba8fa5bcf6677311,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 3399100704591974774, guid: c94be3b6198c5ac4ba8fa5bcf6677311,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5697515782363630913, guid: c94be3b6198c5ac4ba8fa5bcf6677311,
+        type: 3}
+      propertyPath: itemAnchor
+      value: 
+      objectReference: {fileID: 595075507}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c94be3b6198c5ac4ba8fa5bcf6677311, type: 3}
+--- !u!4 &595075507 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2469174021293749564, guid: c94be3b6198c5ac4ba8fa5bcf6677311,
+    type: 3}
+  m_PrefabInstance: {fileID: 595075506}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &663979525
 GameObject:
   m_ObjectHideFlags: 0
@@ -4343,6 +4424,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 4957307535526558423, guid: cd9ce0de171c94440842ecc88f5cef0e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5577233510858188839, guid: cd9ce0de171c94440842ecc88f5cef0e,
         type: 3}
       propertyPath: tileDetector
@@ -5504,3 +5590,4 @@ SceneRoots:
   - {fileID: 989281824}
   - {fileID: 1902451680293442159}
   - {fileID: 1027358552}
+  - {fileID: 595075506}
