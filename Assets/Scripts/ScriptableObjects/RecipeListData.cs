@@ -23,14 +23,28 @@ public class RecipeListData : ScriptableObject
 
     private bool RecipeMatches(RecipeData recipe, List<IngredientData> ingredientDatas)
     {
-        int check3 = 0;
-        // Comprueba si todos los ingredientes de la receta están en la lista proporcionada
-        //return recipe.ingredientDatas.All(ingredientDatas.Contains);
-        for (int i = 0; i < ingredientDatas.Count; i++) {
-            if (recipe.ingredientDatas.Contains(ingredientDatas[i])){
-                check3++;
+        if (recipe.ingredientDatas.Count != ingredientDatas.Count)
+        {
+            return false; // Si las listas no tienen la misma cantidad de ingredientes, no coinciden
+        }
+
+        // Crear una copia de la lista para evitar modificar la original
+        var tempIngredientDatas = new List<IngredientData>(ingredientDatas);
+
+        // Verificar que cada ingrediente de la receta esté presente en `tempIngredientDatas`
+        foreach (var recipeIngredient in recipe.ingredientDatas)
+        {
+            if (tempIngredientDatas.Contains(recipeIngredient))
+            {
+                tempIngredientDatas.Remove(recipeIngredient); // Remover para evitar duplicados
+            }
+            else
+            {
+                return false; // Si falta un ingrediente, no coincide
             }
         }
-        if (check3 == 3) { return true; } else { return false; }
+
+        // Si se removieron todos los ingredientes requeridos y no queda ninguno adicional
+        return tempIngredientDatas.Count == 0;
     }
 }
