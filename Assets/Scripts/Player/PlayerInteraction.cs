@@ -10,7 +10,7 @@ public class PlayerInteraction : MonoBehaviour
     [SerializeField] private TileDetector tileDetector;
 
     private Tile closestTile;
-    private Item item;
+    [SerializeField] public Item item;
 
     private void Update()
     {

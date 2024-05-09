@@ -73,24 +73,26 @@ public class Cauldron : Tile, UIProgress
             {
                 Debug.Log("El jugador tiene una botella vacía");
 
-                // Instanciar el nuevo objeto usando el siguiente ingrediente del líquido actual
+                // Instanciar el nuevo objeto usando el siguiente ingrediente del liquido
                 currentLiquid.TryGetComponent(out Ingredient ingredientLiquid);
                 var newLiquidData = ingredientLiquid.GetNextIngredientData();
                 if (newLiquidData != null)
                 {
-                    // Encuentra el ItemAnchor del jugador para establecer el padre correcto
+                    Destroy(playerItem.gameObject);
+
                     Transform playerItemAnchor = player.GetItemAnchor(); // Método para obtener el ItemAnchor del jugador
 
                     // Instanciar el nuevo objeto como hijo del ItemAnchor del jugador
                     Ingredient newIngredient = Ingredient.SpawnIngredientObject(newLiquidData, playerItemAnchor);
+                    //item = newIngredient.GetComponent<Item>();
 
-                    // Eliminar el objeto actual del jugador
-                    Destroy(playerItem.gameObject);
+                    // Eliminar el objeto botello
 
                     // Asignar el nuevo objeto al jugador
+                    item = newIngredient.GetComponent<Item>();
+                    player.item = null;
                     player.GrabItem(newIngredient);
                     
-                    //item = newIngredient.GetComponent<Item>();
                     /* if (player.GrabItem(newIngredient)) // Asignar el objeto al jugador
                     {
                         OnPlayerGrabbedIngredient?.Invoke(this, EventArgs.Empty); // Disparar evento si el objeto es tomado
@@ -216,16 +218,18 @@ public class Cauldron : Tile, UIProgress
         return ingredientData != null && validIngredientDataList.Contains(ingredientData);
     }
 
-    private void CraftPotion()
+    private bool CraftFood(IngredientData newIngredientData)
     {
-        /* 
-        Debug.Log("La botella fue remplazada");
-        Destroy(item); 
-        */
-        //Destroy(item.gameObject);
-        //Destroy(currentLiquid);
-        currentLiquid.TryGetComponent(out Ingredient ingredientLiquid);
-        ingredientLiquid.GetNextIngredientData();
-        Debug.Log("Destruir liquido");
+        if (item == null) return false; // No reemplazar si no hay objeto
+
+        // Instancia usando el prefab de IngredientData
+        GameObject newFoodClone = Instantiate(newIngredientData.prefab, item.transform.parent, false);
+
+        Destroy(item.gameObject);
+
+        // Asigna el nuevo objeto como el actual
+        item = newFoodClone.GetComponent<Item>();
+
+        return true; // Devuelve true para indicar que se reemplazó con éxito
     }
 }
