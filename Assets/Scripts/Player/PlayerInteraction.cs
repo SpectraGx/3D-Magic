@@ -93,4 +93,12 @@ public class PlayerInteraction : MonoBehaviour
         item = null;
     }
 
+    public Transform GetItemAnchor(){
+        if (itemAnchor==null){
+            Debug.Log("El ItemAnchor no existe/No esta asignado");
+            return null;
+        }
+        return itemAnchor;
+    }
+
 }

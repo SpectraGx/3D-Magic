@@ -13,6 +13,8 @@ public class Cauldron : Tile, UIProgress
     }
 
     public event EventHandler<UIProgress.OnProgressChangedEventArgs> OnProgressChanged;
+    public EventHandler OnPlayerGrabbedIngredient;
+
 
     [Header("Inspector")]
     [SerializeField] private List<IngredientData> validIngredientDataList;
@@ -25,6 +27,7 @@ public class Cauldron : Tile, UIProgress
     private float cookingTimer;
     [SerializeField] private RecipeData activeRecipe; // La receta activa
     [SerializeField] private GameObject currentLiquid;
+    private PlayerInteraction pItemAnchor;
 
 
     public override void Awake()
@@ -68,10 +71,36 @@ public class Cauldron : Tile, UIProgress
         {
             if (playerItem != null && playerItem.TryGetComponent(out Ingredient ingredient) && ingredient.CanBeFill())
             {
-                Debug.Log("El jugador tiene una botella vacia");
-                if (playerItem.TryGetComponent(out Ingredient ingredientBottle))
+                Debug.Log("El jugador tiene una botella vacía");
+
+                // Instanciar el nuevo objeto usando el siguiente ingrediente del líquido actual
+                currentLiquid.TryGetComponent(out Ingredient ingredientLiquid);
+                var newLiquidData = ingredientLiquid.GetNextIngredientData();
+                if (newLiquidData != null)
                 {
-                    CraftPotion();
+                    // Encuentra el ItemAnchor del jugador para establecer el padre correcto
+                    Transform playerItemAnchor = player.GetItemAnchor(); // Método para obtener el ItemAnchor del jugador
+
+                    // Instanciar el nuevo objeto como hijo del ItemAnchor del jugador
+                    Ingredient newIngredient = Ingredient.SpawnIngredientObject(newLiquidData, playerItemAnchor);
+
+                    // Eliminar el objeto actual del jugador
+                    Destroy(playerItem.gameObject);
+
+                    // Asignar el nuevo objeto al jugador
+                    player.GrabItem(newIngredient);
+                    
+                    //item = newIngredient.GetComponent<Item>();
+                    /* if (player.GrabItem(newIngredient)) // Asignar el objeto al jugador
+                    {
+                        OnPlayerGrabbedIngredient?.Invoke(this, EventArgs.Empty); // Disparar evento si el objeto es tomado
+                    } */
+
+
+                    Destroy(currentLiquid);
+
+                    Debug.Log("La botella fue reemplazada por la nueva poción");
+                    state = State.Idle;
                 }
             }
         }
@@ -189,8 +218,10 @@ public class Cauldron : Tile, UIProgress
 
     private void CraftPotion()
     {
-        /* Debug.Log("La botella fue remplazada");
-        Destroy(item); */
+        /* 
+        Debug.Log("La botella fue remplazada");
+        Destroy(item); 
+        */
         //Destroy(item.gameObject);
         //Destroy(currentLiquid);
         currentLiquid.TryGetComponent(out Ingredient ingredientLiquid);
