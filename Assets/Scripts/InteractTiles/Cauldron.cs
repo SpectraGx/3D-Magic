@@ -24,6 +24,7 @@ public class Cauldron : Tile, UIProgress
     private State state;
     private float cookingTimer;
     [SerializeField] private RecipeData activeRecipe; // La receta activa
+    [SerializeField] private GameObject currentLiquid;
 
 
     public override void Awake()
@@ -63,6 +64,17 @@ public class Cauldron : Tile, UIProgress
                 Debug.Log("No hay objeto para agregar.");
             }
         }
+        else if (state == State.Completed)
+        {
+            if (playerItem != null && playerItem.TryGetComponent(out Ingredient ingredient) && ingredient.CanBeFill())
+            {
+                Debug.Log("El jugador tiene una botella vacia");
+                if (playerItem.TryGetComponent(out Ingredient ingredientBottle))
+                {
+                    CraftPotion();
+                }
+            }
+        }
         else
         {
             Debug.Log("El caldero está cocinando.");
@@ -88,7 +100,7 @@ public class Cauldron : Tile, UIProgress
         if (activeRecipe == null)
         {
             Debug.LogError("No se encontró receta para los ingredientes actuales.");
-            state = State.Idle; 
+            state = State.Idle;
             return;
         }
 
@@ -97,18 +109,18 @@ public class Cauldron : Tile, UIProgress
 
     private void Update()
     {
-        if (state == State.Cooking) 
+        if (state == State.Cooking)
         {
             cookingTimer += Time.deltaTime;
 
-            OnProgressChanged?.Invoke(this, new UIProgress.OnProgressChangedEventArgs 
+            OnProgressChanged?.Invoke(this, new UIProgress.OnProgressChangedEventArgs
             {
                 progressNormalized = cookingTimer / activeRecipe.cookingTime // Tiempo máximo de cocción
             });
 
-            if (cookingTimer >= activeRecipe.cookingTime) 
+            if (cookingTimer >= activeRecipe.cookingTime)
             {
-                CompleteCooking(); 
+                CompleteCooking();
             }
         }
     }
@@ -122,7 +134,8 @@ public class Cauldron : Tile, UIProgress
         }
 
         items.Clear(); // Limpia la lista de ingredientes
-        Ingredient.SpawnIngredientObject(activeRecipe.result, itemAnchors[0]); // Instanciar el resultado final
+        //currentLiquid = Ingredient.SpawnIngredientObject(activeRecipe.result, itemAnchors[0]); // Instanciar el resultado final
+        currentLiquid = Instantiate(activeRecipe.result.prefab, itemAnchors[0]);
 
         state = State.Completed; // Cambia al estado Completed
 
@@ -140,31 +153,29 @@ public class Cauldron : Tile, UIProgress
         if (newItem == null || !IsValidIngredient(newItem))
         {
             Debug.Log("El objeto no es un ingrediente válido para el caldero.");
-            return false; 
+            return false;
         }
 
-        // Encuentra el primer punto de anclaje disponible
+        // Encuentra el primer itemAnchor disponible
         for (int i = 0; i < itemAnchors.Count; i++)
         {
-            if (items.Count <= i || items[i] == null) // Si el anclaje está vacío
+            if (items.Count <= i || items[i] == null) // Si el itemAnchor está vacío
             {
-                newItem.transform.SetParent(itemAnchors[i], false); // Establece el padre
+                newItem.transform.SetParent(itemAnchors[i], false);
                 newItem.transform.localPosition = Vector3.zero;
 
                 if (items.Count <= i)
                 {
-                    items.Add(newItem); 
+                    items.Add(newItem);
                 }
                 else
                 {
-                    items[i] = newItem; 
+                    items[i] = newItem;
                 }
-
                 return true;
             }
         }
-
-        return false; 
+        return false;
     }
 
     private bool IsValidIngredient(Item item)
@@ -173,6 +184,17 @@ public class Cauldron : Tile, UIProgress
         if (ingredient == null) return false;
 
         var ingredientData = ingredient.GetIngredientData();
-        return ingredientData != null && validIngredientDataList.Contains(ingredientData); 
+        return ingredientData != null && validIngredientDataList.Contains(ingredientData);
+    }
+
+    private void CraftPotion()
+    {
+        /* Debug.Log("La botella fue remplazada");
+        Destroy(item); */
+        //Destroy(item.gameObject);
+        //Destroy(currentLiquid);
+        currentLiquid.TryGetComponent(out Ingredient ingredientLiquid);
+        ingredientLiquid.GetNextIngredientData();
+        Debug.Log("Destruir liquido");
     }
 }

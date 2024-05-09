@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: LavandaSlice
   itemSprite: {fileID: 0}
-  ingredientType: 1
+  ingredientType: 2
   prefab: {fileID: 1764019898434992816, guid: 1c42070602332da49a3eeb4c3a0f5656, type: 3}

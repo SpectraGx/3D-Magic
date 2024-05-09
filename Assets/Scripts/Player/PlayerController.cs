@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    [Header("Variables")]
+    [Header("Inspector")]
     [SerializeField] private float speed = 10;
 
     private CharacterController characterController;

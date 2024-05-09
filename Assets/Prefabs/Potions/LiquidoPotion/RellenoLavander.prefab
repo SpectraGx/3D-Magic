@@ -76,7 +76,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: ea8ad89087cef194b9d54086f241ec55,
         type: 3}
       propertyPath: m_Name
-      value: RellenoPrueba
+      value: RellenoLavander
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -106,4 +106,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ingredientData: {fileID: 11400000, guid: 8d640ac3a48bcf94db50fa9fa77c2810, type: 2}
-  nextIngredientData: {fileID: 0}
+  nextIngredientData: {fileID: 11400000, guid: b99273b4aef9fc74ea63d3536b5da0d9, type: 2}

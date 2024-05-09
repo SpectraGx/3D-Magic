@@ -32,7 +32,7 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (other.TryGetComponent(out Tile tile))
         {
-            tileDetector.AddTile(tile);
+            tileDetector.AddTile(tile);         // Obtiene la mesa mas cercana al jugador
         }
     }
 
@@ -46,7 +46,7 @@ public class PlayerInteraction : MonoBehaviour
                 highlighter.RemoveHighlight();
             }
 
-            tileDetector.RemoveTile(tile);
+            tileDetector.RemoveTile(tile);      // Remueve la mesa mas cercana
         }
     }
 
@@ -60,11 +60,6 @@ public class PlayerInteraction : MonoBehaviour
 
     public void Interactuar(InputAction.CallbackContext callbackContext)
     {
-        /*if (closestTile && callbackContext.performed)
-        {
-            closestTile.Interact(this,item);
-        }*/
-
         if (closestTile != null)
         {
             if (callbackContext.performed)

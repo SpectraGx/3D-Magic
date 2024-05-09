@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: HongoSlice
   itemSprite: {fileID: 0}
-  ingredientType: 1
+  ingredientType: 2
   prefab: {fileID: 8316022885811745244, guid: 27fa4fb269cf1ea45b92144368dc0823, type: 3}

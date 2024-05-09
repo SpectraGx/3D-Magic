@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 472171910071280319}
+  - component: {fileID: 2618461730955398625}
   m_Layer: 0
   m_Name: BotellaApple
   m_TagString: Untagged
@@ -38,6 +39,20 @@ Transform:
   - {fileID: 4717978504129016095}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2618461730955398625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1364493164441929989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 037f633840723464ea940914c85aa2de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ingredientData: {fileID: 11400000, guid: 3cfbc7227ed397e4eb65472c0af31a1e, type: 2}
+  nextIngredientData: {fileID: 0}
 --- !u!1 &3083735270101856447
 GameObject:
   m_ObjectHideFlags: 0

@@ -97,4 +97,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ingredientData: {fileID: 11400000, guid: 80cc337ea5d7c8448b137f6c26f0ff76, type: 2}
-  nextIngredientData: {fileID: 0}
+  nextIngredientData: {fileID: 11400000, guid: 9b26c29a9cc374e4cb814c731cfbb230, type: 2}
