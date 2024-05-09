@@ -29,6 +29,9 @@ public class Cauldron : Tile, UIProgress
     [SerializeField] private GameObject currentLiquid;
     private PlayerInteraction pItemAnchor;
 
+    private List<IngredientData> calderoIngredients = new List<IngredientData>();
+    
+
 
     public override void Awake()
     {
@@ -117,7 +120,7 @@ public class Cauldron : Tile, UIProgress
         state = State.Cooking; // Cambia al estado Cooking
         cookingTimer = 0f; // Restablece el temporizador
 
-        var calderoIngredients = new List<IngredientData>();
+        /* //var calderoIngredients = new List<IngredientData>();
         foreach (var item in items)
         {
             var ingredientData = item.GetComponent<Ingredient>().GetIngredientData();
@@ -125,7 +128,8 @@ public class Cauldron : Tile, UIProgress
             {
                 calderoIngredients.Add(ingredientData);
             }
-        }
+        } */
+        IngredientAdded();
 
         activeRecipe = recipeList.FindMatchingRecipe(calderoIngredients); // Encuentra la receta correcta
         if (activeRecipe == null)
@@ -136,6 +140,18 @@ public class Cauldron : Tile, UIProgress
         }
 
         Debug.Log("El caldero está cocinando...");
+    }
+
+    public void IngredientAdded(){
+        //var calderoIngredients = new List<IngredientData>();
+        foreach (var item in items)
+        {
+            var ingredientData = item.GetComponent<Ingredient>().GetIngredientData();
+            if (ingredientData != null)
+            {
+                calderoIngredients.Add(ingredientData);
+            }
+        }
     }
 
     private void Update()
