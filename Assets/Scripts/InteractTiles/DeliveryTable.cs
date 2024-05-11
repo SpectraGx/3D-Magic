@@ -28,18 +28,15 @@ public class DeliveryTable : Tile
                 if (GrabItem(playerItem))
                 {
                     player.DropItem();
+                    var ingredient = item.GetComponent<Ingredient>();
+                    DeliveryManager.Instance.DeliveryPotion(ingredient);
+                    ingredient.DestroySelf();
+                    item = null;
                 }
             }
             else
             {
                 Debug.Log("Solo se pueden colocar pociones");
-            }
-        }
-        else if (item != null && playerItem == null)
-        {
-            if (player.GrabItem(item))
-            {
-                DropItem();
             }
         }
     }

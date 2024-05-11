@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ee8c8f5cfacbdb43b9db065639cc7b1, type: 3}
+  m_Name: PotionListData
+  m_EditorClassIdentifier: 
+  potionListData:
+  - {fileID: 11400000, guid: db90df17a3e0f644fb305d11ebc95d75, type: 2}
+  - {fileID: 11400000, guid: 2768de98fa08a5a4a8feee6f5daf0570, type: 2}
+  - {fileID: 11400000, guid: 9b26c29a9cc374e4cb814c731cfbb230, type: 2}
+  - {fileID: 11400000, guid: 9be84176195718f438fcd6db8fdc1555, type: 2}
+  - {fileID: 11400000, guid: b99273b4aef9fc74ea63d3536b5da0d9, type: 2}
+  - {fileID: 11400000, guid: 24e8d1f159ce549489afbf060e246417, type: 2}
+  - {fileID: 11400000, guid: b4d6332032ca56a459f77b3743470c00, type: 2}
+  - {fileID: 11400000, guid: b0e3a9ae207146641ba88e0a5ac4cd76, type: 2}
+  - {fileID: 11400000, guid: 574f057a48be3ad4393a91a1b9c7048e, type: 2}
+  - {fileID: 11400000, guid: acf7c9eb17c46b14987284b6fb54ffeb, type: 2}
