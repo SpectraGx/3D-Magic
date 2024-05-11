@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Lavander
   m_EditorClassIdentifier: 
   itemName: Lavanda
-  itemSprite: {fileID: 0}
+  itemSprite: {fileID: 21300000, guid: 42fcf461b09a5c2449ab97780d137aaa, type: 3}
   ingredientType: 1
   prefab: {fileID: 2567331129774846576, guid: 90d4377d84d5fa741bd52e83ffbdcf46, type: 3}

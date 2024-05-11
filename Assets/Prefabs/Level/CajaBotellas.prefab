@@ -211,9 +211,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e72d987adcb2db84d82273241137d061, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemAnchor: {fileID: 0}
+  itemAnchor: {fileID: 2469174021293749564}
   initialItem: {fileID: 0}
-  bottleItem: {fileID: 0}
+  possibleBottles:
+  - {fileID: 11400000, guid: 40d0d59f35153ad44bb89087b26f496d, type: 2}
 --- !u!4 &3399100704591974774 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: eb1d94a5bc223664a9acd9ddc76f2832,

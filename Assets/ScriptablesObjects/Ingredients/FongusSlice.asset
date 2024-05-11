@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: FongusSlice
   m_EditorClassIdentifier: 
   itemName: HongoSlice
-  itemSprite: {fileID: 0}
+  itemSprite: {fileID: 21300000, guid: 41dc7ccdd5deee44a98c3793930b815d, type: 3}
   ingredientType: 2
   prefab: {fileID: 8316022885811745244, guid: 27fa4fb269cf1ea45b92144368dc0823, type: 3}

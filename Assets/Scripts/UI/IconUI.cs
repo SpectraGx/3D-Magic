@@ -16,10 +16,10 @@ public class IconUI : MonoBehaviour
 
     private void Start()
     {
-        cauldron.OnProgressChanged += UpdateVisual; // Suscribe al evento de cambio de progreso
+        cauldron.OnIngredientAdded += UpdateVisual; // Suscribe al evento de cambio de progreso
     }
 
-    private void UpdateVisual(object sender, UIProgress.OnProgressChangedEventArgs e)
+    private void UpdateVisual(object sender, Cauldron.OnIngredientAddedEventArgs e)
     {
         // Elimina todos los iconos existentes
         foreach (Transform child in transform)
@@ -34,6 +34,15 @@ public class IconUI : MonoBehaviour
             Transform iconTransform = Instantiate(iconTemplate, transform);
             iconTransform.gameObject.SetActive(true);
             iconTransform.GetComponent<IconSingleUI>().SetIngredientObjectData(ingredientData);
+        }
+    }
+
+    public void ResetVisual()
+    {
+        foreach (Transform child in transform)
+        {
+            if (child == iconTemplate) continue;
+            Destroy(child.gameObject);
         }
     }
 }

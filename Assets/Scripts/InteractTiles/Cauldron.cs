@@ -13,7 +13,10 @@ public class Cauldron : Tile, UIProgress
     }
 
     public event EventHandler<UIProgress.OnProgressChangedEventArgs> OnProgressChanged;
-    public event EventHandler OnIngredientAdded; // Nuevo evento para indicar que se agregó un ingrediente al caldero
+    public event EventHandler<OnIngredientAddedEventArgs> OnIngredientAdded; // Nuevo evento para indicar que se agregó un ingrediente al caldero
+    public class OnIngredientAddedEventArgs : EventArgs{
+        public Item ingredient1;
+    }
 
     [Header("Inspector")]
     [SerializeField] private List<IngredientData> validIngredientDataList;
@@ -25,6 +28,7 @@ public class Cauldron : Tile, UIProgress
     private float cookingTimer;
     [SerializeField] private RecipeData activeRecipe; // La receta activa
     [SerializeField] private GameObject currentLiquid;
+    [SerializeField] private IconUI iconUI;
 
     public override void Awake()
     {
@@ -47,7 +51,6 @@ public class Cauldron : Tile, UIProgress
                 {
                     player.DropItem();
                     Debug.Log("Ingrediente agregado al caldero");
-                    OnIngredientAdded?.Invoke(this, EventArgs.Empty); // Dispara el evento de ingrediente agregado
                     if (items.Count == itemAnchors.Count)
                     {
                         StartCooking();
@@ -98,6 +101,8 @@ public class Cauldron : Tile, UIProgress
                     Destroy(currentLiquid);
 
                     Debug.Log("La botella fue reemplazada por la nueva poción");
+                    //OnIngredientAdded = null;
+                    iconUI.ResetVisual();
                     state = State.Idle;
                 }
             }
@@ -191,6 +196,9 @@ public class Cauldron : Tile, UIProgress
                 if (items.Count <= i)
                 {
                     items.Add(newItem);
+                    OnIngredientAdded?.Invoke(this, new OnIngredientAddedEventArgs{
+                        ingredient1 = newItem
+                    }); // Dispara el evento de ingrediente agregado
                 }
                 else
                 {
