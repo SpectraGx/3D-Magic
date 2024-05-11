@@ -13,51 +13,44 @@ public class Cauldron : Tile, UIProgress
     }
 
     public event EventHandler<UIProgress.OnProgressChangedEventArgs> OnProgressChanged;
-    public EventHandler OnPlayerGrabbedIngredient;
-
+    public event EventHandler OnIngredientAdded; // Nuevo evento para indicar que se agregó un ingrediente al caldero
 
     [Header("Inspector")]
     [SerializeField] private List<IngredientData> validIngredientDataList;
     [SerializeField] private RecipeListData recipeList; // Lista de todas las recetas
     [SerializeField] private List<Transform> itemAnchors;
-    //[SerializeField] private float cookingTime; // Tiempo máximo para cocinar
 
     private List<Item> items;
     private State state;
     private float cookingTimer;
     [SerializeField] private RecipeData activeRecipe; // La receta activa
     [SerializeField] private GameObject currentLiquid;
-    private PlayerInteraction pItemAnchor;
-
-    private List<IngredientData> calderoIngredients = new List<IngredientData>();
-    
-
 
     public override void Awake()
     {
         base.Awake();
-        items = new List<Item>(itemAnchors.Count); // Inicializa la lista de objetos
+        items = new List<Item>(itemAnchors.Count);
         state = State.Idle;
         OnProgressChanged?.Invoke(this, new UIProgress.OnProgressChangedEventArgs
         {
-            progressNormalized = 0 // Iniciar el progreso en 0
+            progressNormalized = 0
         });
     }
 
     public override void InteractPick(PlayerInteraction player, Item playerItem)
     {
-        if (state == State.Idle) // Solo permite agregar ingredientes cuando está en estado Idle
+        if (state == State.Idle)
         {
-            if (playerItem != null) // Si el jugador tiene un objeto
+            if (playerItem != null)
             {
-                if (GrabItem(playerItem)) // Intentar agregar el objeto al caldero
+                if (GrabItem(playerItem))
                 {
-                    player.DropItem(); // El jugador suelta el objeto
+                    player.DropItem();
                     Debug.Log("Ingrediente agregado al caldero");
-
-                    if (items.Count == itemAnchors.Count) // Si el caldero está lleno
+                    OnIngredientAdded?.Invoke(this, EventArgs.Empty); // Dispara el evento de ingrediente agregado
+                    if (items.Count == itemAnchors.Count)
                     {
-                        StartCooking(); // Iniciar el proceso de cocción
+                        StartCooking();
                     }
                 }
                 else
@@ -117,21 +110,9 @@ public class Cauldron : Tile, UIProgress
 
     private void StartCooking()
     {
-        state = State.Cooking; // Cambia al estado Cooking
-        cookingTimer = 0f; // Restablece el temporizador
-
-        /* //var calderoIngredients = new List<IngredientData>();
-        foreach (var item in items)
-        {
-            var ingredientData = item.GetComponent<Ingredient>().GetIngredientData();
-            if (ingredientData != null)
-            {
-                calderoIngredients.Add(ingredientData);
-            }
-        } */
-        IngredientAdded();
-
-        activeRecipe = recipeList.FindMatchingRecipe(calderoIngredients); // Encuentra la receta correcta
+        state = State.Cooking;
+        cookingTimer = 0f;
+        activeRecipe = recipeList.FindMatchingRecipe(GetCauldronIngredientDataList()); // Utiliza el nuevo método para obtener los ingredientes
         if (activeRecipe == null)
         {
             Debug.LogError("No se encontró receta para los ingredientes actuales.");
@@ -142,16 +123,18 @@ public class Cauldron : Tile, UIProgress
         Debug.Log("El caldero está cocinando...");
     }
 
-    public void IngredientAdded(){
-        //var calderoIngredients = new List<IngredientData>();
+    public List<IngredientData> GetCauldronIngredientDataList()
+    {
+        List<IngredientData> ingredientDataList = new List<IngredientData>();
         foreach (var item in items)
         {
             var ingredientData = item.GetComponent<Ingredient>().GetIngredientData();
             if (ingredientData != null)
             {
-                calderoIngredients.Add(ingredientData);
+                ingredientDataList.Add(ingredientData);
             }
         }
+        return ingredientDataList;
     }
 
     private void Update()
@@ -159,10 +142,9 @@ public class Cauldron : Tile, UIProgress
         if (state == State.Cooking)
         {
             cookingTimer += Time.deltaTime;
-
             OnProgressChanged?.Invoke(this, new UIProgress.OnProgressChangedEventArgs
             {
-                progressNormalized = cookingTimer / activeRecipe.cookingTime // Tiempo máximo de cocción
+                progressNormalized = cookingTimer / activeRecipe.cookingTime
             });
 
             if (cookingTimer >= activeRecipe.cookingTime)
@@ -174,17 +156,14 @@ public class Cauldron : Tile, UIProgress
 
     private void CompleteCooking()
     {
-        // Destruye todos los ingredientes anteriores
         foreach (var item in items)
         {
             item?.GetComponent<Ingredient>().DestroySelf();
         }
 
-        items.Clear(); // Limpia la lista de ingredientes
-        //currentLiquid = Ingredient.SpawnIngredientObject(activeRecipe.result, itemAnchors[0]); // Instanciar el resultado final
+        items.Clear();
         currentLiquid = Instantiate(activeRecipe.result.prefab, itemAnchors[0]);
-
-        state = State.Completed; // Cambia al estado Completed
+        state = State.Completed;
 
         Debug.Log("El caldero ha completado la cocción y ha creado una poción.");
 
@@ -196,17 +175,15 @@ public class Cauldron : Tile, UIProgress
 
     protected override bool GrabItem(Item newItem)
     {
-        // Verificar si el objeto es un ingrediente válido
         if (newItem == null || !IsValidIngredient(newItem))
         {
             Debug.Log("El objeto no es un ingrediente válido para el caldero.");
             return false;
         }
 
-        // Encuentra el primer itemAnchor disponible
         for (int i = 0; i < itemAnchors.Count; i++)
         {
-            if (items.Count <= i || items[i] == null) // Si el itemAnchor está vacío
+            if (items.Count <= i || items[i] == null)
             {
                 newItem.transform.SetParent(itemAnchors[i], false);
                 newItem.transform.localPosition = Vector3.zero;
@@ -232,20 +209,5 @@ public class Cauldron : Tile, UIProgress
 
         var ingredientData = ingredient.GetIngredientData();
         return ingredientData != null && validIngredientDataList.Contains(ingredientData);
-    }
-
-    private bool CraftFood(IngredientData newIngredientData)
-    {
-        if (item == null) return false; // No reemplazar si no hay objeto
-
-        // Instancia usando el prefab de IngredientData
-        GameObject newFoodClone = Instantiate(newIngredientData.prefab, item.transform.parent, false);
-
-        Destroy(item.gameObject);
-
-        // Asigna el nuevo objeto como el actual
-        item = newFoodClone.GetComponent<Item>();
-
-        return true; // Devuelve true para indicar que se reemplazó con éxito
     }
 }
