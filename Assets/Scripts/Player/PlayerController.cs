@@ -14,10 +14,18 @@ public class PlayerController : MonoBehaviour
     private PlayerInput playerInput;
     Vector3 input;
 
+    [Header("Animations")]
+    private Animator animator;
+    private string currentState;
+    const string Player_Idle = "player_idle";
+    const string Player_Walk = "player_walk";
+    const string player_walkObj = "player_walkObj";
+
     private void Awake()
     {
         characterController = GetComponent<CharacterController>();
         playerInput = GetComponent<PlayerInput>();
+        animator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -38,12 +46,17 @@ public class PlayerController : MonoBehaviour
         if (move != Vector3.zero)
         {
             isMoving = true;
-            Quaternion toRotation = Quaternion.LookRotation(currentMovent);
+            Quaternion toRotation = Quaternion.LookRotation(-currentMovent);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, 2000 * Time.deltaTime);
+            ChangeAnimationState(player_walkObj);
         }
         else
         {
-            isMoving = true;
+            isMoving = false;
+        }
+
+        if (!isMoving){
+            ChangeAnimationState(Player_Idle);
         }
     }
 
@@ -57,4 +70,11 @@ public class PlayerController : MonoBehaviour
 
     //  Metodo publico que indica si el personaje esta en movimiento o no
     public bool IsMoving() => isMoving;
+
+    void ChangeAnimationState(string newState)
+    {
+        if (currentState == newState) return;
+        animator.Play(newState);
+        currentState = newState;
+    }
 }
