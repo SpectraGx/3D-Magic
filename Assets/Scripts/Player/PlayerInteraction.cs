@@ -52,6 +52,7 @@ public class PlayerInteraction : MonoBehaviour
 
     public void PickUp(InputAction.CallbackContext callbackContext)
     {
+        if (!GameManager.Instance.IsGamePlaying()) return;
         if (closestTile && callbackContext.performed)
         {
             closestTile.InteractPick(this, item);
@@ -60,6 +61,7 @@ public class PlayerInteraction : MonoBehaviour
 
     public void Interactuar(InputAction.CallbackContext callbackContext)
     {
+        if (!GameManager.Instance.IsGamePlaying()) return;
         if (closestTile != null)
         {
             if (callbackContext.performed)

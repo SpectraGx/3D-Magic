@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (!GameManager.Instance.IsGamePlaying()) return;
         input = playerInput.actions["Move"].ReadValue<Vector2>();
         ControllerMovement();
 
