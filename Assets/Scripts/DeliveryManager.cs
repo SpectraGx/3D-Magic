@@ -1,9 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class DeliveryManager : MonoBehaviour
 {
+    public event EventHandler OnPotionSpawned;
+    public event EventHandler OnPotionCompleted;
+
     public static DeliveryManager Instance { get; private set; }
 
     [SerializeField] private PotionListData potionListData;
@@ -27,9 +32,11 @@ public class DeliveryManager : MonoBehaviour
 
             if (waitingPotionDataList.Count < waitingPotionMax)
             {
-                IngredientData waitingPotionData = potionListData.potionListData[Random.Range(0, potionListData.potionListData.Count)];
-                Debug.Log(waitingPotionData.itemName);
+                IngredientData waitingPotionData = potionListData.potionListData[UnityEngine.Random.Range(0, potionListData.potionListData.Count)];
+                //Debug.Log(waitingPotionData.itemName);
                 waitingPotionDataList.Add(waitingPotionData);
+
+                OnPotionSpawned?.Invoke(this, EventArgs.Empty);
             }
         }
     }
@@ -44,18 +51,24 @@ public class DeliveryManager : MonoBehaviour
 
             if (ingredient.GetIngredientData() == waitingPotionData)
             {
-                Debug.Log("La orden y la pocion coinciden");
+                //Debug.Log("La orden y la pocion coinciden");
+                OnPotionCompleted?.Invoke(this, EventArgs.Empty);
                 waitingPotionDataList.RemoveAt(i);
             }
-            if (ingredient.GetIngredientData() != waitingPotionData)
+            /* if (ingredient.GetIngredientData() != waitingPotionData)
             {
                 Debug.Log("La orden y la pocion no coinciden");
-            }
+            } */
         }
         if (waitingPotionDataList.Count == 0)
         {
             Debug.Log("El jugador completo todas las recetas");
 
         }
+    }
+
+    public List<IngredientData> GetWaitingPotionDataList()
+    {
+        return waitingPotionDataList;
     }
 }

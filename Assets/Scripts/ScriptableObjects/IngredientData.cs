@@ -15,4 +15,5 @@ public class IngredientData : ScriptableObject{
     public Sprite itemSprite;
     public IngredientType ingredientType;
     public GameObject prefab;
+    public List<IngredientData> ingredientsDataList;
 }

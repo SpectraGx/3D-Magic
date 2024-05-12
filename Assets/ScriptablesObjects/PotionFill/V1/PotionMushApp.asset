@@ -16,3 +16,7 @@ MonoBehaviour:
   itemSprite: {fileID: 0}
   ingredientType: 3
   prefab: {fileID: 4438971594801525974, guid: 8df614fe1834db048a5071bbc5385f5c, type: 3}
+  ingredientsDataList:
+  - {fileID: 11400000, guid: d1a61f178a9e1794c919945c3d73b3a9, type: 2}
+  - {fileID: 11400000, guid: 90733f3ec213fd14ebe5c409e9bb92a8, type: 2}
+  - {fileID: 11400000, guid: d1a61f178a9e1794c919945c3d73b3a9, type: 2}
