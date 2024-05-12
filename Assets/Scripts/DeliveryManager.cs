@@ -16,6 +16,8 @@ public class DeliveryManager : MonoBehaviour
     private float spawnPotionTimer;
     private float spawnPotionTimerMax = 4f;
     private int waitingPotionMax = 4;
+    private int successfulPotionsAmounts;
+
 
     private void Awake()
     {
@@ -53,6 +55,7 @@ public class DeliveryManager : MonoBehaviour
             {
                 //Debug.Log("La orden y la pocion coinciden");
                 OnPotionCompleted?.Invoke(this, EventArgs.Empty);
+                successfulPotionsAmounts++;
                 waitingPotionDataList.RemoveAt(i);
             }
             /* if (ingredient.GetIngredientData() != waitingPotionData)
@@ -70,5 +73,9 @@ public class DeliveryManager : MonoBehaviour
     public List<IngredientData> GetWaitingPotionDataList()
     {
         return waitingPotionDataList;
+    }
+
+    public int GetSuccessfulPotionsAmounts(){
+        return successfulPotionsAmounts;
     }
 }
