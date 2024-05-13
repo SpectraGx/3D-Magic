@@ -20,7 +20,9 @@ public class PlayerController : MonoBehaviour
     private string currentState;
     const string Player_Idle = "player_idle";
     const string Player_Walk = "player_walk";
-    const string player_walkObj = "player_walkObj";
+    const string Player_walkObj = "player_walkObj";
+    const string Player_Cut = "player_cutting";
+
 
     private void Awake()
     {
@@ -50,7 +52,7 @@ public class PlayerController : MonoBehaviour
             isMoving = true;
             Quaternion toRotation = Quaternion.LookRotation(-currentMovent);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, 2000 * Time.deltaTime);
-            ChangeAnimationState(player_walkObj);
+            ChangeAnimationState(Player_Walk);
             //moveParticles.Play();
         }
         else
