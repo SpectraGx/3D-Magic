@@ -50,10 +50,10 @@ public class PlayerController : MonoBehaviour
         {
             ChangeAnimationState(Player_walkObj);
         }
-        /* else if (playerInteraction.HasIngredientObject() && !isMoving)
+         else if (playerInteraction.HasIngredientObject() && !isMoving)
         {
             ChangeAnimationState(Player_IdleObj);
-        } */
+        } 
     }
 
     private void ControllerMovement()
