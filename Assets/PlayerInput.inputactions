@@ -24,18 +24,27 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Dash",
+                    "name": "Interactuar",
                     "type": "Button",
-                    "id": "420bb1f7-22ee-41c4-aed3-e4e57416c279",
+                    "id": "7f59cd38-2f6c-4ed8-b25a-ae9107f825c2",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Interactuar",
+                    "name": "Pausa",
                     "type": "Button",
-                    "id": "7f59cd38-2f6c-4ed8-b25a-ae9107f825c2",
+                    "id": "1441fc82-b630-493f-ba26-630660ee6512",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Dash",
+                    "type": "Button",
+                    "id": "420bb1f7-22ee-41c4-aed3-e4e57416c279",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -142,28 +151,6 @@
                 },
                 {
                     "name": "",
-                    "id": "d6d36532-377e-4896-b272-be6004f1b3a7",
-                    "path": "<Keyboard>/leftShift",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Dash",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "3c7ae51c-6d39-4ebf-9e2c-b3ec064160c6",
-                    "path": "<Gamepad>/buttonEast",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Dash",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "21e79a3b-430a-4d32-ad97-9d05fac413d0",
                     "path": "<Gamepad>/buttonWest",
                     "interactions": "",
@@ -192,6 +179,50 @@
                     "processors": "",
                     "groups": "",
                     "action": "Moler",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d6d36532-377e-4896-b272-be6004f1b3a7",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3c7ae51c-6d39-4ebf-9e2c-b3ec064160c6",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "80f3719d-12a1-4e90-977e-dd70cd9e2c0f",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Pausa",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fdded090-7cae-42f7-978f-f908cdc1b1cc",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Pausa",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

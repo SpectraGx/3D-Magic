@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,9 +6,12 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    public event EventHandler OnGamePaused;
+    public event EventHandler OnGameUnpaused;
     [Header("Inspector")]
     [SerializeField] private float speed = 10;
     [SerializeField] private ParticleSystem moveParticles;
+    [SerializeField] private GameObject pauseMenu;
 
     private CharacterController characterController;
     private Vector3 currentMovent;
@@ -15,6 +19,8 @@ public class PlayerController : MonoBehaviour
     private PlayerInput playerInput;
     private PlayerInteraction playerInteraction;
     Vector3 input;
+    private bool isGamePaused = false;
+    
 
     [Header("Animations")]
     private Animator animator;
@@ -83,6 +89,26 @@ public class PlayerController : MonoBehaviour
         if (callbackContext.performed)
         {
             Debug.Log("Dash");
+        }
+    }
+
+    public void Pause(InputAction.CallbackContext callbackContext)
+    {
+        if (callbackContext.performed)
+        {
+            isGamePaused = !isGamePaused;
+            if (isGamePaused)
+            {
+                pauseMenu.SetActive(true);
+                Time.timeScale = 0f;
+                OnGamePaused?.Invoke(this, EventArgs.Empty);
+            }
+            else
+            {
+                pauseMenu.SetActive(false);
+                Time.timeScale = 1f;
+                OnGameUnpaused?.Invoke(this, EventArgs.Empty);
+            }
         }
     }
 

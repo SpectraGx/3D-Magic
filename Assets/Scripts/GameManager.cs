@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
     {
         Instance = this;
         state = State.WaitingToStart;
+        Time.timeScale = 1f;
     }
 
     private void Update()
