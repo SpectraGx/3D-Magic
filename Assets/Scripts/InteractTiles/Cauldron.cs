@@ -30,11 +30,14 @@ public class Cauldron : Tile, UIProgress
     [SerializeField] private GameObject currentLiquid;
     [SerializeField] private IconUI iconUI;
 
+    [SerializeField] private ParticleSystem smokeParticle;
+
     public override void Awake()
     {
         base.Awake();
         items = new List<Item>(itemAnchors.Count);
         state = State.Idle;
+        smokeParticle.Stop();
         OnProgressChanged?.Invoke(this, new UIProgress.OnProgressChangedEventArgs
         {
             progressNormalized = 0
@@ -126,6 +129,8 @@ public class Cauldron : Tile, UIProgress
         }
 
         Debug.Log("El caldero está cocinando...");
+        smokeParticle.Play();
+
     }
 
     public List<IngredientData> GetCauldronIngredientDataList()
@@ -171,6 +176,7 @@ public class Cauldron : Tile, UIProgress
         state = State.Completed;
 
         Debug.Log("El caldero ha completado la cocción y ha creado una poción.");
+        smokeParticle.Stop();
 
         OnProgressChanged?.Invoke(this, new UIProgress.OnProgressChangedEventArgs
         {

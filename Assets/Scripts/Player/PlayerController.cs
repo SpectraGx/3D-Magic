@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     [Header("Inspector")]
     [SerializeField] private float speed = 10;
+    [SerializeField] private ParticleSystem moveParticles;
 
     private CharacterController characterController;
     private Vector3 currentMovent;
@@ -50,10 +51,12 @@ public class PlayerController : MonoBehaviour
             Quaternion toRotation = Quaternion.LookRotation(-currentMovent);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, 2000 * Time.deltaTime);
             ChangeAnimationState(player_walkObj);
+            //moveParticles.Play();
         }
         else
         {
             isMoving = false;
+            //moveParticles.Stop();
         }
 
         if (!isMoving){
@@ -77,5 +80,16 @@ public class PlayerController : MonoBehaviour
         if (currentState == newState) return;
         animator.Play(newState);
         currentState = newState;
+    }
+
+    void ActivateParticles(bool activate){
+        if (moveParticles != null){
+            if (activate && !moveParticles.isPlaying){
+                moveParticles.Play();
+            }
+            else if (!activate && moveParticles.isPlaying){
+                moveParticles.Stop();
+            }
+        }
     }
 }
