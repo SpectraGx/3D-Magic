@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class GameManager : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class GameManager : MonoBehaviour
     private float countdownToStartTimer = 3f;
     private float gamePlayingToStartTimer;
     [SerializeField] private float gamePlayingToStartTimerMax = 90f;
+    [SerializeField] private GameObject playButton;
 
 
     private void Awake()
@@ -59,7 +61,7 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             case State.GameOver:
-
+                //SelectPlayButton();
                 break;
         }
         Debug.Log(state);
@@ -80,11 +82,21 @@ public class GameManager : MonoBehaviour
         return countdownToStartTimer;
     }
 
-    public bool IsGameOver(){
+    public bool IsGameOver()
+    {
         return state == State.GameOver;
     }
 
-    public float GetGamePlayingTimerNormalized(){
-        return 1- (gamePlayingToStartTimer/gamePlayingToStartTimerMax);
+    public float GetGamePlayingTimerNormalized()
+    {
+        return 1 - (gamePlayingToStartTimer / gamePlayingToStartTimerMax);
+    }
+
+    private void SelectPlayButton()
+    {
+        if (EventSystem.current != null)
+        {
+            EventSystem.current.SetSelectedGameObject(playButton);
+        }
     }
 }
