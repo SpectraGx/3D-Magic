@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class DeliveryTable : Tile
 {
+    [SerializeField] private ParticleSystem starsParticles;
+    public override void Awake()
+    {
+        base.Awake();
+        starsParticles.Stop();
+    }
     protected bool IsValidIngredient(Item item)
     {
         // Verificar si el item es un ingrediente
@@ -38,6 +44,22 @@ public class DeliveryTable : Tile
             {
                 Debug.Log("Solo se pueden colocar pociones");
             }
+        }
+    }
+
+    public void ActivateDeliveryParticles()
+    {
+        if (starsParticles != null)
+        {
+            starsParticles.Play();
+        }
+    }
+
+    public void DesactivateDeliveryParticles()
+    {
+        if (starsParticles != null)
+        {
+            starsParticles.Stop();
         }
     }
 }

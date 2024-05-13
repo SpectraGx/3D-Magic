@@ -13,12 +13,17 @@ public class CuttingTable : Tile, UIProgress
     private float cutTimer = 0f;
     private bool _isCutting = false;
 
+    const string Player_Cut = "player_cutting";
+    const string Player_Idle = "player_idle";
+
+
 
     public override void OnInteractStart(PlayerInteraction player)
     {
         if (item != null && item.TryGetComponent(out Ingredient ingredient) && ingredient.CanBeCut())
         {
             _isCutting = true;  // Empieza a cortar
+            player.playerController.ChangeAnimationState(Player_Cut);
         }
     }
 
@@ -26,6 +31,8 @@ public class CuttingTable : Tile, UIProgress
     {
         _isCutting = false;     // Deja de cortar
         cutTimer = 0;
+        player.playerController.ChangeAnimationState(Player_Idle);
+
 
         OnProgressChanged?.Invoke(this, new UIProgress.OnProgressChangedEventArgs
         {

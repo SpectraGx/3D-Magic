@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 currentMovent;
     private bool isMoving;
     private PlayerInput playerInput;
+    private PlayerInteraction playerInteraction;
     Vector3 input;
 
     [Header("Animations")]
@@ -22,6 +23,7 @@ public class PlayerController : MonoBehaviour
     const string Player_Walk = "player_walk";
     const string Player_walkObj = "player_walkObj";
     const string Player_Cut = "player_cutting";
+    const string Player_IdleObj = "player_idleObj";
 
 
     private void Awake()
@@ -29,6 +31,7 @@ public class PlayerController : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         playerInput = GetComponent<PlayerInput>();
         animator = GetComponent<Animator>();
+        playerInteraction = GetComponent<PlayerInteraction>();
     }
 
     private void Update()
@@ -37,6 +40,14 @@ public class PlayerController : MonoBehaviour
         input = playerInput.actions["Move"].ReadValue<Vector2>();
         ControllerMovement();
 
+        if (playerInteraction.HasIngredientObject() && isMoving)
+        {
+            ChangeAnimationState(Player_walkObj);
+        }
+        /* else if (playerInteraction.HasIngredientObject() && !isMoving)
+        {
+            ChangeAnimationState(Player_IdleObj);
+        } */
     }
 
     private void ControllerMovement()
@@ -61,7 +72,8 @@ public class PlayerController : MonoBehaviour
             //moveParticles.Stop();
         }
 
-        if (!isMoving){
+        if (!isMoving)
+        {
             ChangeAnimationState(Player_Idle);
         }
     }
@@ -77,19 +89,23 @@ public class PlayerController : MonoBehaviour
     //  Metodo publico que indica si el personaje esta en movimiento o no
     public bool IsMoving() => isMoving;
 
-    void ChangeAnimationState(string newState)
+    public void ChangeAnimationState(string newState)
     {
         if (currentState == newState) return;
         animator.Play(newState);
         currentState = newState;
     }
 
-    void ActivateParticles(bool activate){
-        if (moveParticles != null){
-            if (activate && !moveParticles.isPlaying){
+    void ActivateParticles(bool activate)
+    {
+        if (moveParticles != null)
+        {
+            if (activate && !moveParticles.isPlaying)
+            {
                 moveParticles.Play();
             }
-            else if (!activate && moveParticles.isPlaying){
+            else if (!activate && moveParticles.isPlaying)
+            {
                 moveParticles.Stop();
             }
         }

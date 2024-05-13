@@ -18,6 +18,10 @@ public class DeliveryManager : MonoBehaviour
     private int waitingPotionMax = 4;
     private int successfulPotionsAmounts;
 
+    [SerializeField] private DeliveryTable deliveryTable;
+    [SerializeField] private float particlesDuration=1f;
+    private Coroutine particlesCoroutine;
+
 
     private void Awake()
     {
@@ -57,6 +61,16 @@ public class DeliveryManager : MonoBehaviour
                 OnPotionCompleted?.Invoke(this, EventArgs.Empty);
                 successfulPotionsAmounts++;
                 waitingPotionDataList.RemoveAt(i);
+
+                if (deliveryTable != null){
+                    deliveryTable.ActivateDeliveryParticles();
+                    if (particlesCoroutine != null)
+                        StopCoroutine(particlesCoroutine);
+                    particlesCoroutine = StartCoroutine(DesactivateParticlesDelay());
+                    
+                }
+
+                break;
             }
             /* if (ingredient.GetIngredientData() != waitingPotionData)
             {
@@ -77,5 +91,12 @@ public class DeliveryManager : MonoBehaviour
 
     public int GetSuccessfulPotionsAmounts(){
         return successfulPotionsAmounts;
+    }
+
+    private IEnumerator DesactivateParticlesDelay(){
+        yield return new WaitForSeconds(particlesDuration);
+        if (deliveryTable!=null){
+            deliveryTable.DesactivateDeliveryParticles();
+        }
     }
 }

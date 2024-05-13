@@ -11,6 +11,12 @@ public class PlayerInteraction : MonoBehaviour
 
     private Tile closestTile;
     [SerializeField] public Item item;
+    public PlayerController playerController;
+
+    private void Awake()
+    {
+        playerController = GetComponent<PlayerController>();
+    }
 
     private void Update()
     {
@@ -95,8 +101,10 @@ public class PlayerInteraction : MonoBehaviour
         item = null;
     }
 
-    public Transform GetItemAnchor(){
-        if (itemAnchor==null){
+    public Transform GetItemAnchor()
+    {
+        if (itemAnchor == null)
+        {
             Debug.Log("El ItemAnchor no existe/No esta asignado");
             return null;
         }
