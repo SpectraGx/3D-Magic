@@ -10,7 +10,7 @@ public class BottleBox : Tile
     [Header("Bottle Data")]
     [SerializeField] private List<IngredientData> possibleBottles; 
 
-    // Método para obtener una botella aleatoria
+    // Metodo para obtener una botella aleatoria
     private IngredientData GetRandomIngredientData()
     {
         if (possibleBottles == null || possibleBottles.Count == 0)

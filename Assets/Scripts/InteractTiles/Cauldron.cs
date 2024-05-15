@@ -13,7 +13,7 @@ public class Cauldron : Tile, UIProgress
     }
 
     public event EventHandler<UIProgress.OnProgressChangedEventArgs> OnProgressChanged;
-    public event EventHandler<OnIngredientAddedEventArgs> OnIngredientAdded; // Nuevo evento para indicar que se agregó un ingrediente al caldero
+    public event EventHandler<OnIngredientAddedEventArgs> OnIngredientAdded; // Nuevo evento para indicar que se agrego un ingrediente al caldero
     public class OnIngredientAddedEventArgs : EventArgs{
         public Item ingredient1;
     }
@@ -82,7 +82,7 @@ public class Cauldron : Tile, UIProgress
                 {
                     Destroy(playerItem.gameObject);
 
-                    Transform playerItemAnchor = player.GetItemAnchor(); // Método para obtener el ItemAnchor del jugador
+                    Transform playerItemAnchor = player.GetItemAnchor(); // Metodo para obtener el ItemAnchor del jugador
 
                     // Instanciar el nuevo objeto como hijo del ItemAnchor del jugador
                     Ingredient newIngredient = Ingredient.SpawnIngredientObject(newLiquidData, playerItemAnchor);
@@ -120,7 +120,7 @@ public class Cauldron : Tile, UIProgress
     {
         state = State.Cooking;
         cookingTimer = 0f;
-        activeRecipe = recipeList.FindMatchingRecipe(GetCauldronIngredientDataList()); // Utiliza el nuevo método para obtener los ingredientes
+        activeRecipe = recipeList.FindMatchingRecipe(GetCauldronIngredientDataList()); // Utiliza el nuevo metodo para obtener los ingredientes
         if (activeRecipe == null)
         {
             Debug.LogError("No se encontró receta para los ingredientes actuales.");
