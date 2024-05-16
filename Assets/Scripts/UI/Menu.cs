@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
+    private void Awake() {
+        Screen.fullScreen = true;
+    }
     public void Play(string name)
     {
         SceneManager.LoadScene(name);

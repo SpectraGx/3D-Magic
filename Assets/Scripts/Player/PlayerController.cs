@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float speed = 10;
     [SerializeField] private ParticleSystem moveParticles;
     [SerializeField] private GameObject pauseMenu;
+    [SerializeField] private AudioSource musicSource;
 
     private CharacterController characterController;
     private Vector3 currentMovent;
@@ -109,12 +110,24 @@ public class PlayerController : MonoBehaviour
             {
                 pauseMenu.SetActive(true);
                 Time.timeScale = 0f;
+/*                 AudioSource[] audios = FindObjectsOfType<AudioSource>();
+                foreach (AudioSource a in audios)
+                {
+                    a.Pause();
+                } */
+                musicSource.Pause();
                 OnGamePaused?.Invoke(this, EventArgs.Empty);
             }
             else
             {
                 pauseMenu.SetActive(false);
                 Time.timeScale = 1f;
+/*                 AudioSource[] audios = FindObjectsOfType<AudioSource>();
+                foreach (AudioSource a in audios)
+                {
+                    a.Play();
+                } */
+                musicSource.Play();
                 OnGameUnpaused?.Invoke(this, EventArgs.Empty);
             }
         }
