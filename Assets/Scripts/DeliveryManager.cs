@@ -26,6 +26,7 @@ public class DeliveryManager : MonoBehaviour
     
 
     private Coroutine particlesCoroutine;
+    private Coroutine particlesSpiralsCoroutine;
 
 
     private void Awake()
@@ -82,6 +83,13 @@ public class DeliveryManager : MonoBehaviour
             else {
                 Debug.Log("No coinciden");
                 PlayMismatchPotion();
+                if (deliveryTable != null){
+                    deliveryTable.ActivateSpiralsParticles();
+                    if (particlesSpiralsCoroutine != null)
+                        StopCoroutine(particlesSpiralsCoroutine);
+                    particlesSpiralsCoroutine = StartCoroutine(DesactivateParticlesSpiralsDelay());
+                    
+                }
             }
             /* if (ingredient.GetIngredientData() != waitingPotionData)
             {
@@ -111,6 +119,13 @@ public class DeliveryManager : MonoBehaviour
         yield return new WaitForSeconds(particlesDuration);
         if (deliveryTable!=null){
             deliveryTable.DesactivateDeliveryParticles();
+        }
+    }
+
+    private IEnumerator DesactivateParticlesSpiralsDelay(){
+        yield return new WaitForSeconds(particlesDuration);
+        if (deliveryTable!=null){
+            deliveryTable.DeactivateSpiralsParticles();
         }
     }
 

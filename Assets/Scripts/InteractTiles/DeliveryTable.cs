@@ -5,10 +5,12 @@ using UnityEngine;
 public class DeliveryTable : Tile
 {
     [SerializeField] private ParticleSystem starsParticles;
+    [SerializeField] private ParticleSystem spiralsParticles;
     public override void Awake()
     {
         base.Awake();
         starsParticles.Stop();
+        spiralsParticles.Stop();
     }
     protected bool IsValidIngredient(Item item)
     {
@@ -60,6 +62,22 @@ public class DeliveryTable : Tile
         if (starsParticles != null)
         {
             starsParticles.Stop();
+        }
+    }
+
+    public void ActivateSpiralsParticles()
+    {
+        if (spiralsParticles != null)
+        {
+            spiralsParticles.Play();
+        }
+    }
+
+    public void DeactivateSpiralsParticles()
+    {
+        if (spiralsParticles != null)
+        {
+            spiralsParticles.Stop();
         }
     }
 }
