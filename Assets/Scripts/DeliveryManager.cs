@@ -20,6 +20,11 @@ public class DeliveryManager : MonoBehaviour
 
     [SerializeField] private DeliveryTable deliveryTable;
     [SerializeField] private float particlesDuration=1f;
+    [SerializeField] private AudioClip potionMatch;
+    [SerializeField] private AudioClip potionMismatch;
+    private AudioSource audioSource;
+    
+
     private Coroutine particlesCoroutine;
 
 
@@ -27,6 +32,7 @@ public class DeliveryManager : MonoBehaviour
     {
         Instance = this;
         waitingPotionDataList = new List<IngredientData>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -61,7 +67,6 @@ public class DeliveryManager : MonoBehaviour
                 OnPotionCompleted?.Invoke(this, EventArgs.Empty);
                 successfulPotionsAmounts++;
                 waitingPotionDataList.RemoveAt(i);
-
                 if (deliveryTable != null){
                     deliveryTable.ActivateDeliveryParticles();
                     if (particlesCoroutine != null)
@@ -69,14 +74,23 @@ public class DeliveryManager : MonoBehaviour
                     particlesCoroutine = StartCoroutine(DesactivateParticlesDelay());
                     
                 }
+                PlayMatchPotion();
+
 
                 break;
+            }
+            else {
+                Debug.Log("No coinciden");
+                PlayMismatchPotion();
             }
             /* if (ingredient.GetIngredientData() != waitingPotionData)
             {
                 Debug.Log("La orden y la pocion no coinciden");
             } */
         }
+
+
+
         if (waitingPotionDataList.Count == 0)
         {
             Debug.Log("El jugador completo todas las recetas");
@@ -97,6 +111,32 @@ public class DeliveryManager : MonoBehaviour
         yield return new WaitForSeconds(particlesDuration);
         if (deliveryTable!=null){
             deliveryTable.DesactivateDeliveryParticles();
+        }
+    }
+
+    private void PlayMatchPotion()
+    {
+        if (potionMatch != null && audioSource != null)
+        {
+            audioSource.clip = potionMatch;
+            audioSource.Play();
+        }
+    }
+
+    private void PlayMismatchPotion()
+    {
+        if (potionMismatch != null && audioSource != null)
+        {
+            audioSource.clip = potionMismatch;
+            audioSource.Play();
+        }
+    }
+
+    private void StopCuttingSound()
+    {
+        if (audioSource != null)
+        {
+            audioSource.Stop();
         }
     }
 }

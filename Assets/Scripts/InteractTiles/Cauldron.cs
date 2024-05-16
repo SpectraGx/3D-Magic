@@ -22,10 +22,14 @@ public class Cauldron : Tile, UIProgress
     [SerializeField] private List<IngredientData> validIngredientDataList;
     [SerializeField] private RecipeListData recipeList; // Lista de todas las recetas
     [SerializeField] private List<Transform> itemAnchors;
+    [SerializeField] private AudioClip cauldronSound;
+
 
     private List<Item> items;
     private State state;
     private float cookingTimer;
+    private AudioSource audioSource;
+
     [SerializeField] private RecipeData activeRecipe; // La receta activa
     [SerializeField] private GameObject currentLiquid;
     [SerializeField] private IconUI iconUI;
@@ -35,6 +39,7 @@ public class Cauldron : Tile, UIProgress
     public override void Awake()
     {
         base.Awake();
+        audioSource = GetComponent<AudioSource>();
         items = new List<Item>(itemAnchors.Count);
         state = State.Idle;
         smokeParticle.Stop();
@@ -107,6 +112,8 @@ public class Cauldron : Tile, UIProgress
                     //OnIngredientAdded = null;
                     iconUI.ResetVisual();
                     state = State.Idle;
+                    smokeParticle.Stop();
+                    StopCauldronSound();
                 }
             }
         }
@@ -129,6 +136,7 @@ public class Cauldron : Tile, UIProgress
         }
 
         Debug.Log("El caldero está cocinando...");
+        PlayCauldronSound();
         smokeParticle.Play();
 
     }
@@ -176,7 +184,7 @@ public class Cauldron : Tile, UIProgress
         state = State.Completed;
 
         Debug.Log("El caldero ha completado la cocción y ha creado una poción.");
-        smokeParticle.Stop();
+        //smokeParticle.Stop();
 
         OnProgressChanged?.Invoke(this, new UIProgress.OnProgressChangedEventArgs
         {
@@ -223,5 +231,22 @@ public class Cauldron : Tile, UIProgress
 
         var ingredientData = ingredient.GetIngredientData();
         return ingredientData != null && validIngredientDataList.Contains(ingredientData);
+    }
+
+    private void PlayCauldronSound()
+    {
+        if (cauldronSound != null && audioSource != null)
+        {
+            audioSource.clip = cauldronSound;
+            audioSource.Play();
+        }
+    }
+
+    private void StopCauldronSound()
+    {
+        if (audioSource != null)
+        {
+            audioSource.Stop();
+        }
     }
 }

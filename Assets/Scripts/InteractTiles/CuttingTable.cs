@@ -9,14 +9,20 @@ public class CuttingTable : Tile, UIProgress
 
     [Header("Inspector")]
     [SerializeField] private float timeToCut = 3f;
+    [SerializeField] private AudioClip cuttingSound;
     [Header("Variables privadas")]
     private float cutTimer = 0f;
     private bool _isCutting = false;
+    private AudioSource audioSource;
 
     const string Player_Cut = "player_cutting";
     const string Player_Idle = "player_idle";
 
-
+    public override void Awake()
+    {
+        base.Awake();
+        audioSource = GetComponent<AudioSource>();
+    }
 
     public override void OnInteractStart(PlayerInteraction player)
     {
@@ -24,6 +30,7 @@ public class CuttingTable : Tile, UIProgress
         {
             _isCutting = true;  // Empieza a cortar
             player.playerController.ChangeAnimationState(Player_Cut);
+            PlayCuttingSound();
         }
     }
 
@@ -32,6 +39,7 @@ public class CuttingTable : Tile, UIProgress
         _isCutting = false;     // Deja de cortar
         cutTimer = 0;
         player.playerController.ChangeAnimationState(Player_Idle);
+        StopCuttingSound();
 
 
         OnProgressChanged?.Invoke(this, new UIProgress.OnProgressChangedEventArgs
@@ -89,5 +97,23 @@ public class CuttingTable : Tile, UIProgress
 
         return true; // Devuelve true para indicar que se reemplazó con éxito
     }
+
+    private void PlayCuttingSound()
+    {
+        if (cuttingSound != null && audioSource != null)
+        {
+            audioSource.clip = cuttingSound;
+            audioSource.Play();
+        }
+    }
+
+    private void StopCuttingSound()
+    {
+        if (audioSource != null)
+        {
+            audioSource.Stop();
+        }
+    }
+
 
 }

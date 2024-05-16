@@ -23,5 +23,6 @@ public class Menu : MonoBehaviour
 
     public void Window(){
         Screen.fullScreen = false;
+        Screen.SetResolution(1280, 720, false);
     }
 }

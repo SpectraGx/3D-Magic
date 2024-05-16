@@ -10,14 +10,17 @@ public class GameStartCountdownUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI startText;
     //[SerializeField] private string phraseText;
     [SerializeField] private float timePhraseText = 1f;
+    [SerializeField] private AudioClip countdownAudio;
 
     private Animator animator;
+    private AudioSource audioSource;
     private int previousCountdownNumber;
     private const string NUMBER_POPUP = "NumberPopup";
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -33,6 +36,7 @@ public class GameStartCountdownUI : MonoBehaviour
         if (GameManager.Instance.IsCountdownToStartActive())
         {
             Show();
+            PlayCountdownAudio();
         }
         else
         {
@@ -77,5 +81,12 @@ public class GameStartCountdownUI : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-
+    private void PlayCountdownAudio()
+    {
+        if (countdownAudio != null && audioSource != null)
+        {
+            audioSource.clip = countdownAudio;
+            audioSource.Play();
+        }
+    }
 }

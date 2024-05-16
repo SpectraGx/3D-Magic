@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
     private PlayerInteraction playerInteraction;
     Vector3 input;
     private bool isGamePaused = false;
-    
+
 
     [Header("Animations")]
     private Animator animator;
@@ -46,14 +46,22 @@ public class PlayerController : MonoBehaviour
         input = playerInput.actions["Move"].ReadValue<Vector2>();
         ControllerMovement();
 
-        if (playerInteraction.HasIngredientObject() && isMoving)
+        if (!isMoving && !playerInteraction.HasIngredientObject())
+        {
+            ChangeAnimationState(Player_Idle);
+        }
+        else if (isMoving && !playerInteraction.HasIngredientObject())
+        {
+            ChangeAnimationState(Player_Walk);
+        }
+        else if (!isMoving && playerInteraction.HasIngredientObject())
+        {
+            ChangeAnimationState(Player_IdleObj);
+        }
+        else if (isMoving && playerInteraction.HasIngredientObject())
         {
             ChangeAnimationState(Player_walkObj);
         }
-         else if (playerInteraction.HasIngredientObject() && !isMoving)
-        {
-            ChangeAnimationState(Player_IdleObj);
-        } 
     }
 
     private void ControllerMovement()
@@ -69,7 +77,7 @@ public class PlayerController : MonoBehaviour
             isMoving = true;
             Quaternion toRotation = Quaternion.LookRotation(-currentMovent);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, 2000 * Time.deltaTime);
-            ChangeAnimationState(Player_Walk);
+            //ChangeAnimationState(Player_Walk);
             //moveParticles.Play();
         }
         else
@@ -80,7 +88,7 @@ public class PlayerController : MonoBehaviour
 
         if (!isMoving)
         {
-            ChangeAnimationState(Player_Idle);
+            //ChangeAnimationState(Player_Idle);
         }
     }
 
