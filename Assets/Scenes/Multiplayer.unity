@@ -4430,12 +4430,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 609039332}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &544662315 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 867848381996503075, guid: 24069ec0c4b018d47b2b3eed08bd3c7b,
-    type: 3}
-  m_PrefabInstance: {fileID: 6876586328688053050}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &547804333
 GameObject:
   m_ObjectHideFlags: 0
@@ -7362,7 +7356,7 @@ MonoBehaviour:
   m_NotificationBehavior: 0
   m_MaxPlayerCount: 2
   m_AllowJoining: 0
-  m_JoinBehavior: 0
+  m_JoinBehavior: 2
   m_PlayerJoinedEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -7381,7 +7375,7 @@ MonoBehaviour:
       m_SingletonActionBindings: []
       m_Flags: 0
     m_Reference: {fileID: 0}
-  m_PlayerPrefab: {fileID: 544662315}
+  m_PlayerPrefab: {fileID: 0}
   m_SplitScreen: 0
   m_MaintainAspectRatioInSplitScreen: 0
   m_FixedNumberOfSplitScreens: -1
@@ -18312,7 +18306,7 @@ PrefabInstance:
     - target: {fileID: 1531580255872219378, guid: 0975757296bbd8e4dae558ae2b621691,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.39
+      value: -5.83
       objectReference: {fileID: 0}
     - target: {fileID: 1531580255872219378, guid: 0975757296bbd8e4dae558ae2b621691,
         type: 3}

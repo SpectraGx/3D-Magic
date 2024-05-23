@@ -50,7 +50,35 @@ public class Menu : MonoBehaviour
             {creditsMenu, creditsFirstButton},
         };
 
+        LoadUserSettings();
+
     }
+
+    private void LoadUserSettings()
+    {
+        // Cargar el modo de pantalla completa
+        if (PlayerPrefs.HasKey("fullscreen"))
+        {
+            screnF = PlayerPrefs.GetInt("fullscreen") == 1;
+            Screen.fullScreen = screnF;
+        }
+
+        // Cargar la resolución
+        if (PlayerPrefs.HasKey("resolutionWidth") && PlayerPrefs.HasKey("resolutionHeight"))
+        {
+            width = PlayerPrefs.GetInt("resolutionWidth");
+            height = PlayerPrefs.GetInt("resolutionHeight");
+            Screen.SetResolution(width, height, screnF);
+        }
+
+        // Cargar el índice de la resolución
+        if (PlayerPrefs.HasKey("newResolution"))
+        {
+            newResolution = PlayerPrefs.GetInt("newResolution");
+            Resolutions();
+        }
+    }
+
     public void Play(string name)
     {
         SceneManager.LoadScene(name);
@@ -65,12 +93,14 @@ public class Menu : MonoBehaviour
     {
         Screen.fullScreen = true;
         screnF = true;
+        PlayerPrefs.SetInt("FullScreen", 1);
     }
 
     public void Window()
     {
         Screen.fullScreen = false;
         screnF = false;
+        PlayerPrefs.SetInt("FullScreen", 0);
     }
 
     public void OpenPanel(GameObject panelToOpen)
@@ -117,12 +147,14 @@ public class Menu : MonoBehaviour
         OpenPanel(controlsMenu);
     }
 
-    public void NextControl(){
+    public void NextControl()
+    {
         controlsNum++;
         ControlsPanel();
     }
 
-    public void BackControl(){
+    public void BackControl()
+    {
         controlsNum--;
         ControlsPanel();
     }
@@ -166,12 +198,14 @@ public class Menu : MonoBehaviour
         OpenPanel(videoMenu);
     }
 
-    public void NextResolution(){
+    public void NextResolution()
+    {
         newResolution++;
         Resolutions();
     }
 
-    public void BackResolution(){
+    public void BackResolution()
+    {
         newResolution--;
         Resolutions();
     }
@@ -179,6 +213,10 @@ public class Menu : MonoBehaviour
     public void ApplyResolution()
     {
         Screen.SetResolution(width, height, screnF);
+        PlayerPrefs.SetInt("resolutionWidth", width);
+        PlayerPrefs.SetInt("resolutionHeight", height);
+        PlayerPrefs.SetInt("resolution", newResolution);
+        PlayerPrefs.Save();
     }
 
     private void Resolutions()
@@ -206,11 +244,13 @@ public class Menu : MonoBehaviour
         resolutioonText.text = width.ToString() + " - " + height.ToString();
     }
 
-    public void OpenCredits(){
+    public void OpenCredits()
+    {
         OpenPanel(creditsMenu);
     }
 
-    public void URL(string url){
+    public void URL(string url)
+    {
         Application.OpenURL(url);
     }
 }
