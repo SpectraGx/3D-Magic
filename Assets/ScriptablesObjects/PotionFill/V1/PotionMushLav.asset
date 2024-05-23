@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9092c9defc3ab743a18830a4e55d672, type: 3}
   m_Name: PotionMushLav
   m_EditorClassIdentifier: 
-  itemName: PotionMushLav
+  itemName: Amanecer
   itemSprite: {fileID: 0}
   ingredientType: 3
   prefab: {fileID: 4438971594801525974, guid: dd6af3327609856469ce6a17494f4daa, type: 3}

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9092c9defc3ab743a18830a4e55d672, type: 3}
   m_Name: PotionLavMush
   m_EditorClassIdentifier: 
-  itemName: PotionLavMush
+  itemName: Flor Lunar
   itemSprite: {fileID: 0}
   ingredientType: 3
   prefab: {fileID: 4438971594801525974, guid: ee45bbcfbb65b1f46a31ebf259d45d0e, type: 3}

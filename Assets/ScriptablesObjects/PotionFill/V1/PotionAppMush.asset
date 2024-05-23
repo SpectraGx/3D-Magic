@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9092c9defc3ab743a18830a4e55d672, type: 3}
   m_Name: PotionAppMush
   m_EditorClassIdentifier: 
-  itemName: PotionAppMush
+  itemName: Equinocio
   itemSprite: {fileID: 0}
   ingredientType: 3
   prefab: {fileID: 4438971594801525974, guid: 03b3eb1e908db72439eea5e249875ba4, type: 3}

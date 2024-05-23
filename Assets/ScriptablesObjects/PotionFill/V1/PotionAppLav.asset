@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9092c9defc3ab743a18830a4e55d672, type: 3}
   m_Name: PotionAppLav
   m_EditorClassIdentifier: 
-  itemName: PotionAppLav
+  itemName: Glucky
   itemSprite: {fileID: 0}
   ingredientType: 3
   prefab: {fileID: 4438971594801525974, guid: 6d46ea46a4a98b44cad3b9f0d7e56d94, type: 3}
