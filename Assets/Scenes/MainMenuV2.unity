@@ -154,6 +154,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1486880977}
+  - {fileID: 1432367870}
   - {fileID: 963764783}
   - {fileID: 1977183841}
   - {fileID: 1125094576}
@@ -6068,7 +6069,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 260, y: 404}
+  m_AnchoredPosition: {x: 260, y: 439.00003}
   m_SizeDelta: {x: 87, y: 87}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1125094577
@@ -6118,7 +6119,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1539134923}
         m_TargetAssemblyTypeName: Menu, Assembly-CSharp
-        m_MethodName: ControlsPanel
+        m_MethodName: NextControl
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7014,6 +7015,81 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1430385002}
   m_CullTransparentMesh: 1
+--- !u!1 &1432367869
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1432367870}
+  - component: {fileID: 1432367872}
+  - component: {fileID: 1432367871}
+  m_Layer: 5
+  m_Name: P_Instrucciones
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1432367870
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1432367869}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 18539788}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 101}
+  m_SizeDelta: {x: 1489.92, y: 838.08}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1432367871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1432367869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 9115ace5aa5043e438b7cd31dca285d8, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1432367872
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1432367869}
+  m_CullTransparentMesh: 1
 --- !u!1 &1432383974
 GameObject:
   m_ObjectHideFlags: 0
@@ -7202,7 +7278,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1486880975
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7390,6 +7466,7 @@ MonoBehaviour:
   controlsMenu: {fileID: 18539787}
   controlsKeyboardMenu: {fileID: 1486880974}
   controlsControlsMenu: {fileID: 963764780}
+  controlsHow: {fileID: 1432367869}
   videoMenu: {fileID: 2076681887}
   creditsMenu: {fileID: 506478134}
   mainFirstButton: {fileID: 1282250929}
@@ -8732,7 +8809,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -260, y: 404}
+  m_AnchoredPosition: {x: -260, y: 439}
   m_SizeDelta: {x: 87, y: 87}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1977183842
@@ -8782,7 +8859,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1539134923}
         m_TargetAssemblyTypeName: Menu, Assembly-CSharp
-        m_MethodName: ControlsPanel
+        m_MethodName: BackControl
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

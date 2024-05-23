@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private AudioSource musicSource;
     [SerializeField] private float gamePlayingToStartTimerMax = 90f;
-    [SerializeField] private GameObject playButton;
+    [SerializeField] private GameObject gameOverFirstButton;
 
 
     private void Awake()
@@ -68,6 +68,8 @@ public class GameManager : MonoBehaviour
                 break;
             case State.GameOver:
                 //SelectPlayButton();
+                EventSystem.current.SetSelectedGameObject(null);
+                EventSystem.current.SetSelectedGameObject(gameOverFirstButton);
                 break;
         }
         Debug.Log(state);
@@ -96,14 +98,6 @@ public class GameManager : MonoBehaviour
     public float GetGamePlayingTimerNormalized()
     {
         return 1 - (gamePlayingToStartTimer / gamePlayingToStartTimerMax);
-    }
-
-    private void SelectPlayButton()
-    {
-        if (EventSystem.current != null)
-        {
-            EventSystem.current.SetSelectedGameObject(playButton);
-        }
     }
 
     public void Pause()

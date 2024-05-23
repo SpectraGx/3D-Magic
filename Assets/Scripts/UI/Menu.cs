@@ -11,6 +11,7 @@ public class Menu : MonoBehaviour
     private int width, height;
     private int newResolution;
     private bool screnF;
+    private int controlsNum;
     [SerializeField] private TextMeshProUGUI resolutioonText;
     private Dictionary<GameObject, GameObject> panelFirstButtonMapping;
 
@@ -22,6 +23,7 @@ public class Menu : MonoBehaviour
     [SerializeField] private GameObject controlsMenu;
     [SerializeField] private GameObject controlsKeyboardMenu;
     [SerializeField] private GameObject controlsControlsMenu;
+    [SerializeField] private GameObject controlsHow;
     [SerializeField] private GameObject videoMenu;
     [SerializeField] private GameObject creditsMenu;
 
@@ -115,9 +117,19 @@ public class Menu : MonoBehaviour
         OpenPanel(controlsMenu);
     }
 
+    public void NextControl(){
+        controlsNum++;
+        ControlsPanel();
+    }
+
+    public void BackControl(){
+        controlsNum--;
+        ControlsPanel();
+    }
+
     public void ControlsPanel()
     {
-        if (controlsKeyboardMenu.activeSelf)
+        /* if (controlsKeyboardMenu.activeSelf)
         {
             controlsKeyboardMenu.SetActive(false);
             controlsControlsMenu.SetActive(true);
@@ -126,7 +138,27 @@ public class Menu : MonoBehaviour
         {
             controlsControlsMenu.SetActive(false);
             controlsKeyboardMenu.SetActive(true);
+        } */
+        controlsNum = Mathf.Clamp(controlsNum, 0, 2);
+        switch (controlsNum)
+        {
+            case 0:
+                controlsKeyboardMenu.SetActive(false);
+                controlsHow.SetActive(false);
+                controlsControlsMenu.SetActive(true);
+                break;
+            case 1:
+                controlsKeyboardMenu.SetActive(false);
+                controlsHow.SetActive(true);
+                controlsControlsMenu.SetActive(false);
+                break;
+            case 2:
+                controlsKeyboardMenu.SetActive(true);
+                controlsHow.SetActive(false);
+                controlsControlsMenu.SetActive(false);
+                break;
         }
+
     }
 
     public void OpenVideo()
