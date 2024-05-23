@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     private PlayerInteraction playerInteraction;
     Vector3 input;
     private bool isGamePaused = false;
+    [SerializeField ]private GameManager gameManager;
 
 
     [Header("Animations")]
@@ -105,7 +106,7 @@ public class PlayerController : MonoBehaviour
     {
         if (callbackContext.performed)
         {
-            isGamePaused = !isGamePaused;
+            /* isGamePaused = !isGamePaused;
             if (isGamePaused)
             {
                 pauseMenu.SetActive(true);
@@ -114,7 +115,7 @@ public class PlayerController : MonoBehaviour
                 foreach (AudioSource a in audios)
                 {
                     a.Pause();
-                } */
+                } 
                 musicSource.Pause();
                 OnGamePaused?.Invoke(this, EventArgs.Empty);
             }
@@ -126,10 +127,11 @@ public class PlayerController : MonoBehaviour
                 foreach (AudioSource a in audios)
                 {
                     a.Play();
-                } */
+                } 
                 musicSource.Play();
                 OnGameUnpaused?.Invoke(this, EventArgs.Empty);
-            }
+            }*/
+            gameManager.Pause();
         }
     }
 

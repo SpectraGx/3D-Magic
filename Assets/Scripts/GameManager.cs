@@ -6,6 +6,8 @@ using UnityEngine.EventSystems;
 
 public class GameManager : MonoBehaviour
 {
+    public event EventHandler OnGamePaused;
+    public event EventHandler OnGameUnpaused;
     public static GameManager Instance { get; private set; }
 
     public event EventHandler OnStateChanged;
@@ -21,6 +23,9 @@ public class GameManager : MonoBehaviour
     private float waitingToStartTimer = 1f;
     private float countdownToStartTimer = 3f;
     private float gamePlayingToStartTimer;
+    private bool isGamePaused;
+    [SerializeField] private GameObject pauseMenu;
+    [SerializeField] private AudioSource musicSource;
     [SerializeField] private float gamePlayingToStartTimerMax = 90f;
     [SerializeField] private GameObject playButton;
 
@@ -99,5 +104,25 @@ public class GameManager : MonoBehaviour
         {
             EventSystem.current.SetSelectedGameObject(playButton);
         }
+    }
+
+    public void Pause()
+    {
+        isGamePaused = !isGamePaused;
+        if (isGamePaused)
+        {
+            pauseMenu.SetActive(true);
+            Time.timeScale = 0f;
+            musicSource.Pause();
+            OnGamePaused?.Invoke(this, EventArgs.Empty);
+        }
+        else
+        {
+            pauseMenu.SetActive(false);
+            Time.timeScale = 1f;
+            musicSource.Play();
+            OnGameUnpaused?.Invoke(this, EventArgs.Empty);
+        }
+
     }
 }
