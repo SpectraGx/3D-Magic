@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9092c9defc3ab743a18830a4e55d672, type: 3}
   m_Name: PotionMushLav
   m_EditorClassIdentifier: 
-  itemName: Amanecer
-  itemSprite: {fileID: 0}
+  itemName: "L\xFAgria"
+  itemSprite: {fileID: 21300000, guid: a149916c219fc784ea00bacdb65793b8, type: 3}
   ingredientType: 3
   prefab: {fileID: 4438971594801525974, guid: dd6af3327609856469ce6a17494f4daa, type: 3}
   ingredientsDataList:
