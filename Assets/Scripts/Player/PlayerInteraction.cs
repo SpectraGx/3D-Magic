@@ -12,6 +12,7 @@ public class PlayerInteraction : MonoBehaviour
     private Tile closestTile;
     [SerializeField] public Item item;
     public PlayerController playerController;
+    [SerializeField] private RecipeBookUI recipeBookUI;
 
     private void Awake()
     {
@@ -109,6 +110,30 @@ public class PlayerInteraction : MonoBehaviour
             return null;
         }
         return itemAnchor;
+    }
+
+    public void NextPage(InputAction.CallbackContext context)
+    {
+        if (context.performed && recipeBookUI != null && recipeBookUI.gameObject.activeSelf)
+        {
+            recipeBookUI.ShowNextPage();
+        }
+    }
+
+    public void PreviousPage(InputAction.CallbackContext context)
+    {
+        if (context.performed && recipeBookUI != null && recipeBookUI.gameObject.activeSelf)
+        {
+            recipeBookUI.ShowPreviousPage();
+        }
+    }
+
+    public void CloseBook(InputAction.CallbackContext context)
+    {
+        if (context.performed && recipeBookUI != null && recipeBookUI.gameObject.activeSelf)
+        {
+            recipeBookUI.ToggleBook();
+        }
     }
 
 }
