@@ -11,8 +11,8 @@ public class PlayerController : MonoBehaviour
     [Header("Inspector")]
     [SerializeField] private float speed = 10;
     [SerializeField] private ParticleSystem moveParticles;
-    [SerializeField] private GameObject pauseMenu;
-    [SerializeField] private AudioSource musicSource;
+    //[SerializeField] private GameObject pauseMenu;
+    //[SerializeField] private AudioSource musicSource;
 
     private CharacterController characterController;
     private Vector3 currentMovent;
@@ -40,6 +40,7 @@ public class PlayerController : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
         animator = GetComponent<Animator>();
         playerInteraction = GetComponent<PlayerInteraction>();
+        gameManager = FindObjectOfType<GameManager>();
     }
 
     private void Update()

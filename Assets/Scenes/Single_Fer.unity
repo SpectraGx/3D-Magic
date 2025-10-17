@@ -20339,7 +20339,8 @@ PrefabInstance:
       value: ZonaEntrega
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 1458429594550053221, guid: 578510a6df3308d429b8d9f631be9b53, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 578510a6df3308d429b8d9f631be9b53, type: 3}

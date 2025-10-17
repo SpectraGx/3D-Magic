@@ -17,6 +17,7 @@ public class PlayerInteraction : MonoBehaviour
     private void Awake()
     {
         playerController = GetComponent<PlayerController>();
+        recipeBookUI = FindObjectOfType<RecipeBookUI>();
     }
 
     private void Update()
