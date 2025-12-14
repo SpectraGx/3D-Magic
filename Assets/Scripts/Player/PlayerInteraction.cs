@@ -113,6 +113,7 @@ public class PlayerInteraction : MonoBehaviour
         return itemAnchor;
     }
 
+    /*
     public void NextPage(InputAction.CallbackContext context)
     {
         if (context.performed && recipeBookUI != null && recipeBookUI.gameObject.activeSelf)
@@ -136,5 +137,6 @@ public class PlayerInteraction : MonoBehaviour
             recipeBookUI.ToggleBook();
         }
     }
+    */
 
 }

@@ -11,8 +11,20 @@ public class RecipeBookTile : Tile
     {
         if (recipeBookUI != null)
         {
-            recipeBookUI.ToggleBook();
-            //playerInput.SwitchCurrentActionMap("UI");
+            PlayerInput input = player.GetComponent<PlayerInput>();
+            if (input != null)
+            {
+                recipeBookUI.OpenBook(input);
+
+                //recipeBookUI.ToggleBook();
+
+                //playerInput.SwitchCurrentActionMap("UI");
+            }
         }
+    }
+
+    public override void OnInteractStop(PlayerInteraction player)
+    {
+        base.OnInteractStop(player);
     }
 }
