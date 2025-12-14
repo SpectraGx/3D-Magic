@@ -83,6 +83,18 @@ public class PlayerInteraction : MonoBehaviour
         }
     }
 
+    public void CancelAction (InputAction.CallbackContext callbackContext)
+    {
+        if (!callbackContext.performed) return;
+
+        if (RecipeBookUI.Instance != null && RecipeBookUI.Instance.isOpen)
+        {
+            RecipeBookUI.Instance.CloseBook();
+            return;
+        }
+        //DropItem();
+    }
+
     public bool GrabItem(Item _item)
     {
         if (item) return false;

@@ -60,27 +60,9 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "NextPage",
+                    "name": "Cancel",
                     "type": "Button",
-                    "id": "72e9c88f-e774-4883-b19f-28f29a39355d",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "PreviousPage",
-                    "type": "Button",
-                    "id": "cc99c435-63ed-49df-b697-9fbf70745391",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "CloseBook",
-                    "type": "Button",
-                    "id": "9680c7d7-31a0-4abc-a164-5b6a90aedb78",
+                    "id": "5ead6beb-7873-4f6d-8875-2ae907080e41",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -299,34 +281,23 @@
                 },
                 {
                     "name": "",
-                    "id": "273cf11f-ee76-43fb-85b9-bb8013933164",
-                    "path": "<Gamepad>/dpad/right",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "NextPage",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "a97ee1b9-bc1f-42c4-bccd-faaf805ad1cd",
-                    "path": "<Gamepad>/dpad/left",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "PreviousPage",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "5439d18a-e7aa-4da4-b64e-b6673cbdf3f7",
+                    "id": "0ade1c0b-2fb4-4abd-ae50-f03d9f28f60e",
                     "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "CloseBook",
+                    "action": "Cancel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ec4cdd94-c317-46bb-ac76-4482a1e03100",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Cancel",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

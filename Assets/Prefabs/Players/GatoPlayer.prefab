@@ -857,8 +857,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   moveParticles: {fileID: 134421008494250795}
-  pauseMenu: {fileID: 0}
-  musicSource: {fileID: 0}
   gameManager: {fileID: 0}
 --- !u!114 &4371757565923293744
 MonoBehaviour:
@@ -991,7 +989,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 4371757565923293744}
         m_TargetAssemblyTypeName: PlayerInteraction, Assembly-CSharp
-        m_MethodName: NextPage
+        m_MethodName: CancelAction
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1001,40 +999,16 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: 72e9c88f-e774-4883-b19f-28f29a39355d
-    m_ActionName: Player/NextPage[/XInputControllerWindows/dpad/right]
+    m_ActionId: 5ead6beb-7873-4f6d-8875-2ae907080e41
+    m_ActionName: Player/Cancel[/XInputControllerWindows/buttonEast,/Keyboard/tab]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4371757565923293744}
-        m_TargetAssemblyTypeName: PlayerInteraction, Assembly-CSharp
-        m_MethodName: PreviousPage
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: cc99c435-63ed-49df-b697-9fbf70745391
-    m_ActionName: Player/PreviousPage[/XInputControllerWindows/dpad/left]
+      m_Calls: []
+    m_ActionId: 8eadc7bc-62c9-40fa-98f5-76f72c416137
+    m_ActionName: UI/Navigate[/Mouse/scroll,/XInputControllerWindows/leftStick,/XInputControllerWindows/dpad]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4371757565923293744}
-        m_TargetAssemblyTypeName: PlayerInteraction, Assembly-CSharp
-        m_MethodName: CloseBook
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 9680c7d7-31a0-4abc-a164-5b6a90aedb78
-    m_ActionName: Player/CloseBook[/XInputControllerWindows/buttonEast]
+      m_Calls: []
+    m_ActionId: d9ee62bd-b5a9-4ea9-b091-af9f38150ca6
+    m_ActionName: UI/Close[/XInputControllerWindows/buttonWest,/XInputControllerWindows/buttonEast,/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
