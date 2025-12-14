@@ -8,6 +8,7 @@ public class GameStartCountdownUI : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI countdownText;
     [SerializeField] private TextMeshProUGUI startText;
+    [SerializeField] private GameObject instructionText;
     //[SerializeField] private string phraseText;
     [SerializeField] private float timePhraseText = 1f;
     [SerializeField] private AudioClip countdownAudio;
@@ -78,6 +79,7 @@ public class GameStartCountdownUI : MonoBehaviour
         startText.gameObject.SetActive(true);
         yield return new WaitForSeconds(duration);
         startText.gameObject.SetActive(false);
+        instructionText.SetActive(false);
         gameObject.SetActive(false);
     }
 
